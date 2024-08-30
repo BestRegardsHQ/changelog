@@ -1,5 +1,5 @@
-import { Text } from "@chakra-ui/react";
 import React from "react";
+import { Text } from "@mantine/core";
 
 type Props = {
   children: React.ReactNode;
@@ -8,11 +8,7 @@ type Props = {
 
 export function FooterTitle(props: Props) {
   return (
-    <Text
-      fontFamily="landingHeading"
-      fontWeight="bold"
-      color={props.mode === "dark" ? "white" : "landing.black"}
-    >
+    <Text fw="bold" color={props.mode === "dark" ? "white" : "landing.black"}>
       {props.children}
     </Text>
   );

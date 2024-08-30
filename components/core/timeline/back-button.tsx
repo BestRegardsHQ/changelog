@@ -1,15 +1,15 @@
-import { motion } from "framer-motion";
-import usePreviousPageUrl from "lib/state/use-previous-page-url-store";
-import { useRouter } from "next/router";
 import { useState } from "react";
+import { useRouter } from "next/router";
+import { Box, Text } from "@mantine/core";
+import { motion } from "framer-motion";
 
-import { Box, Text } from "@chakra-ui/react";
+import usePreviousPageUrl from "lib/state/use-previous-page-url-store";
 
 const BackButton = () => {
   const { prevUrl } = usePreviousPageUrl();
   const router = useRouter();
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [, setIsLoading] = useState(false);
 
   return (
     <Box
@@ -22,26 +22,15 @@ const BackButton = () => {
           setIsLoading(true);
         }
       }}
-      cursor="pointer"
       display="flex"
-      gap={3}
-      alignItems="center"
-      justifyContent="start"
-      width="125px"
+      w="125px"
       // on hover change .arrow-line fill to #000000 and .arrow-head stroke to #000000
       // and .back-button-text color to #000000
-      _hover={{
-        ".arrow-line": {
-          fill: "#000000",
-        },
-        ".arrow-head": {
-          stroke: "#000000",
-        },
-        ".back-button-text": {
-          color: "#000000",
-        },
-      }}
       sx={{
+        gap: "10px",
+        alignItems: "center",
+        justifyContent: "start",
+        cursor: "pointer",
         ".arrow-line": {
           transition: "fill 0.2s ease",
         },
@@ -50,6 +39,17 @@ const BackButton = () => {
         },
         ".back-button-text": {
           transition: "color 0.2s ease",
+        },
+        ":hover": {
+          ".arrow-line": {
+            fill: "#000000",
+          },
+          ".arrow-head": {
+            stroke: "#000000",
+          },
+          ".back-button-text": {
+            color: "#000000",
+          },
         },
       }}
     >
@@ -85,13 +85,7 @@ const BackButton = () => {
       </svg>
 
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
-        <Text
-          className="back-button-text"
-          fontSize="16px"
-          color="#868E96"
-          alignItems="start"
-          // _hover={{ textDecoration: "underline" }}
-        >
+        <Text size="md" color="#868E96">
           Back
         </Text>
       </motion.div>

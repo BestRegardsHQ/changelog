@@ -1,7 +1,8 @@
-import { Box, HStack, Image, VStack, Skeleton } from "@chakra-ui/react";
 import dayjs from "dayjs";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
+import { Box, Group, Image, Stack } from "@mantine/core";
+
 import { IGridProps } from "./grid-interfaces";
 
 const SmallGrid = (props: IGridProps) => {
@@ -9,8 +10,8 @@ const SmallGrid = (props: IGridProps) => {
   const router = useRouter();
 
   return (
-    <HStack height="100%" maxHeight="360px" maxWidth={"682px"}>
-      <Box width="100%">
+    <Group h="100%" mah="360px" maw={"682px"}>
+      <Box w="100%">
         <motion.div
           layoutId={props.isFirstItem ? changelogs[0].slug : ``}
           initial={{
@@ -24,9 +25,14 @@ const SmallGrid = (props: IGridProps) => {
           <Image
             src={changelogs[0]?.imageUrl}
             alt={changelogs[0]?.slug}
-            minHeight={["176px", "176px", "360px"]}
-            objectFit={"cover"}
-            fallbackSrc="/plain-gray.jpg"
+            sx={(t) => ({
+              cursor: "pointer",
+              objectFit: "cover",
+              minHeight: "176px",
+              [t.breakpoints.lg]: {
+                minHeight: "360px",
+              },
+            })}
             onClick={() => {
               const date = dayjs(changelogs[0]?.publishedAt);
               const targetDate = date.format("MMM YYYY");
@@ -38,17 +44,19 @@ const SmallGrid = (props: IGridProps) => {
           />
         </motion.div>
       </Box>
-      <VStack width="176px" height="100%">
-        {changelogs.slice(1, changelogs.length).map(({ imageUrl, slug, publishedAt}, index) => (
+      <Stack w="176px" h="100%">
+        {changelogs.slice(1, changelogs.length).map(({ imageUrl, slug, publishedAt }, index) => (
           <Image
             key={index}
             src={imageUrl}
             alt={slug}
-            objectFit={"cover"}
-            maxHeight="176px"
+            mah="176px"
             height="100%"
-            maxWidth="176px"
-            fallbackSrc="/plain-gray.jpg"
+            maw="176px"
+            sx={{
+              objectFit: "cover",
+              cursor: "pointer",
+            }}
             onClick={() => {
               const date = dayjs(publishedAt);
               const targetDate = date.format("MMM YYYY");
@@ -59,8 +67,8 @@ const SmallGrid = (props: IGridProps) => {
             }}
           />
         ))}
-      </VStack>
-    </HStack>
+      </Stack>
+    </Group>
   );
 };
 

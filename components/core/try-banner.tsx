@@ -1,9 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import { NextResponsiveImage } from "components/core/next-responsive-image";
-import { Box, Button, Container, Heading, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, Container, Stack, Text, Title } from "@mantine/core";
+
 import { PageSectionProps } from "lib/models/page-section-props";
-import { GradientHighlight, Highlight } from "./highlight";
+import { NextResponsiveImage } from "components/core/next-responsive-image";
 
 interface TryJuneBannerProps extends PageSectionProps {
   subheading?: string;
@@ -17,24 +17,8 @@ interface TryJuneBannerProps extends PageSectionProps {
 
 function TryJuneBanner(props: TryJuneBannerProps) {
   const {
-    heading = (
-      <>
-        Set up June{" "}
-        <GradientHighlight {...(props.mode === "dark" && { variant: "lightest", glow: true })}>
-          in 2 minutes
-        </GradientHighlight>
-      </>
-    ),
-    description = (
-      <>
-        Just connect <Highlight>Segment</Highlight>, implement{" "}
-        <Highlight as="a" href="https://www.june.so/docs">
-          our SDK
-        </Highlight>{" "}
-        or use our <Highlight>other integrations</Highlight> to start understanding how your product
-        is used
-      </>
-    ),
+    heading = <>Set up BestRegards in 2 minutes</>,
+    description = <>Description ...</>,
     buttonText = "Get started for free",
     buttonHref = "https://analytics.june.so/start",
     buttonHrefType = "external",
@@ -49,25 +33,24 @@ function TryJuneBanner(props: TryJuneBannerProps) {
         );
 
   return (
-    <Container maxW="landingMax" position="relative" px={[0, 0, 12, 12, 40]} {...props._wrapper}>
+    <Container size="lg" position="relative" px={[0, 0, 12, 12, 40]} {...props._wrapper}>
       {/* Glowing background */}
       {mode === "dark" && (
         <Box
           pos="absolute"
           bg="purple.500"
           opacity={0.5}
-          filter="blur(200px)"
           top="64px"
           bottom="64px"
           left="-16px"
           right="-16px"
-          zIndex="auto"
+          sx={{
+            zIndex: "auto",
+            filter: "blur(200px)",
+          }}
         />
       )}
       <Box
-        position="relative"
-        px={[8, 8, 20]}
-        py={[8, 8, 16]}
         {...(mode === "dark" && {
           bg: "purple.900",
           border: "2px solid",
@@ -75,66 +58,85 @@ function TryJuneBanner(props: TryJuneBannerProps) {
           borderRadius: "2xl",
           filter: "drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.2))",
         })}
+        sx={(t) => ({
+          position: "relative",
+          padding: 8,
+          [t.breakpoints.lg]: {
+            padding: "16 20",
+          },
+        })}
       >
         {/* Background with opacity */}
         <Box
-          position="absolute"
           top={0}
           left={0}
           right={0}
           bottom={0}
           opacity={0.05}
-          borderRadius="2xl"
           bg="linear-gradient(129.77deg, #ADABFF 16.97%, #9C88DD 64.88%, #CB8AE8 94.21%);"
+          sx={(t) => ({
+            borderRadius: "2xl",
+            position: "absolute",
+          })}
         />
         {/* Background grid */}
-        <Box position="absolute" right={0} bottom={0} top={0}>
+        <Box
+          right={0}
+          bottom={0}
+          top={0}
+          sx={{
+            position: "absolute",
+          }}
+        >
           <NextResponsiveImage
+            h="full"
             src="/try-june-bg-grid.svg"
             alt="Background grid"
-            sx={{ aspectRatio: "0.7788018433" }}
-            height="full"
-            visibility={["hidden", "hidden", "visible"]}
+            sx={(t) => ({
+              aspectRatio: "0.7788018433",
+              visibility: "hidden",
+              [t.breakpoints.lg]: {
+                visibility: "visible",
+              },
+            })}
           />
         </Box>
-        <VStack align="center" spacing={6}>
-          <VStack align="center" spacing={4} pos="relative">
-            <Heading
-              as="h2"
-              fontFamily="landingHeading"
-              fontSize={[48, 48, 64]}
-              lineHeight="1.2"
-              color={mode === "light" ? "purple.900" : "white"}
-              letterSpacing="-0.02em"
-              textAlign={"center"}
-            >
+        <Stack align="center" spacing={6}>
+          <Stack align="center" spacing={4} pos="relative">
+            <Title order={2} align={"center"}>
               {heading}
-            </Heading>
+            </Title>
             <Text
-              fontSize="md"
-              fontFamily="landingHeading"
-              color={mode === "light" ? "gray.900" : "white"}
-              lineHeight="7"
-              maxW={["100%", "100%", "75%"]}
-              textAlign={"center"}
+              size="md"
+              align={"center"}
+              sx={(t) => ({
+                [t.breakpoints.lg]: {
+                  maxWidth: "75%",
+                },
+              })}
             >
               {description}
             </Text>
-          </VStack>
+          </Stack>
           <LinkOrFragment>
             <Button
-              as="a"
-              size="landingMd"
-              variant={"landingGradient"}
+              w="full"
+              component="a"
+              size="md"
+              variant="gradient"
               rel="noreferrer noopener"
               className="g-conversion-button"
-              w={["full", "full", "unset"]}
+              sx={(t) => ({
+                [t.breakpoints.lg]: {
+                  width: "unset",
+                },
+              })}
               {...(buttonHrefType === "external" && { href: buttonHref })}
             >
               {buttonText}
             </Button>
           </LinkOrFragment>
-        </VStack>
+        </Stack>
       </Box>
     </Container>
   );

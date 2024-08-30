@@ -1,20 +1,23 @@
-import { IAggregatedChangelogs, IImagePreviewMeta } from "lib/models/view";
 import dayjs from "dayjs";
+import { motion } from "framer-motion";
+import LazyLoad from "react-lazyload";
+import { Box, Stack } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
+
 import MediumGrid from "components/core/years/medium-grid";
 import LargeGrid from "components/core/years/large-grid";
-import { Box, useMediaQuery, VStack } from "@chakra-ui/react";
-import Timeline from "../../components/layout/timeline";
-import { motion } from "framer-motion";
 import MoreItems from "components/core/more-items";
 import SmallGrid from "components/core/years/small-grid";
-import LazyLoad from "react-lazyload";
+import { IAggregatedChangelogs, IImagePreviewMeta } from "lib/models/view";
+
+import Timeline from "../../components/layout/timeline";
 
 interface IYearsProps {
   yearChangelogsMap: IAggregatedChangelogs;
 }
 
 const Years = ({ yearChangelogsMap }: IYearsProps) => {
-  const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
+  const isLargerThan768 = useMediaQuery("(min-width: 768px)");
 
   const sortedYearKeys = Object.keys(yearChangelogsMap || {}).sort((a, b) => {
     const dateA = new Date(a);
@@ -37,27 +40,36 @@ const Years = ({ yearChangelogsMap }: IYearsProps) => {
           >
             <Box
               display="flex"
-              paddingBottom={index === sortedChangelogsByYear.length - 1 ? 0 : [12, 16, 20]}
+              pb={index === sortedChangelogsByYear.length - 1 ? 0 : { xs: 12, sm: 16, md: 20 }}
             >
-              <VStack onClick={() => {}} cursor="pointer">
+              <Stack
+                onClick={() => {}}
+                sx={{
+                  cursor: "pointer",
+                }}
+              >
                 <Box
-                  overflow="hidden"
-                  borderRadius={"16px"}
-                  maxWidth="682px"
-                  width={["100%", "100%", "682px"]}
+                  maw="682px"
+                  w={{
+                    xs: "100%",
+                    sm: "100%",
+                    md: "682px",
+                  }}
                   display="flex"
                   onClick={() => {}}
-                  position="relative"
-                  _hover={{
-                    boxShadow: "0px 2px 4px 0px rgba(0, 0, 0, 0.1)",
-                    "& img": {
-                      boxShadow: "0px 2px 4px 0px rgba(0, 0, 0, 0.1)",
-                    },
-                  }}
                   sx={{
+                    position: "relative",
+                    overflow: "hidden",
+                    borderRadius: "16px",
                     transition: "box-shadow 0.3s",
                     "& img": {
                       transition: "box-shadow 0.3s",
+                    },
+                    ":hover": {
+                      boxShadow: "0px 2px 4px 0px rgba(0, 0, 0, 0.1)",
+                      "& img": {
+                        boxShadow: "0px 2px 4px 0px rgba(0, 0, 0, 0.1)",
+                      },
                     },
                   }}
                 >
@@ -82,7 +94,7 @@ const Years = ({ yearChangelogsMap }: IYearsProps) => {
                     </LazyLoad>
                   )}
                 </Box>
-              </VStack>
+              </Stack>
             </Box>
           </motion.div>
         </Timeline>

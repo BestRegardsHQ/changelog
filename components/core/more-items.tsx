@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box } from "@mantine/core";
 
 const MoreItems = (props: { numberOfItems: number }) => {
   const { numberOfItems } = props;
@@ -8,19 +8,21 @@ const MoreItems = (props: { numberOfItems: number }) => {
       w={10}
       h={6}
       display="flex"
-      position="absolute"
-      zIndex={999}
       bottom={4}
       right={4}
-      bg="linear-gradient(180deg, #6868F7 0%, #4C40D9 100%)"
-      borderRadius={999}
-      textAlign="center"
-      fontSize="12px"
-      alignItems="center"
-      justifyContent="center"
       color="white"
-      fontWeight="semibold"
-      lineHeight={"14.52px"}
+      sx={{
+        zIndex: 999,
+        fontWeight: 500,
+        fontSize: "12px",
+        borderRadius: 999,
+        textAlign: "center",
+        position: "absolute",
+        alignItems: "center",
+        justifyContent: "center",
+        lineHeight: "14.52px",
+      }}
+      bg="linear-gradient(180deg, #6868F7 0%, #4C40D9 100%)"
     >
       +{numberOfItems}
     </Box>

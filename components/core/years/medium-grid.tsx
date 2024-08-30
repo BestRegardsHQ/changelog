@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem, Image, VStack, Skeleton } from "@chakra-ui/react";
+import { Box, Image, Stack } from "@mantine/core";
 import dayjs from "dayjs";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
@@ -8,9 +8,8 @@ const MediumGrid = (props: IGridProps) => {
   const { changelogs } = props;
   const router = useRouter();
 
-
   return changelogs.length < 9 ? (
-    <VStack spacing="8px">
+    <Stack spacing="8px">
       {changelogs
         .reverse()
         .reduce((result, item, index) => {
@@ -23,7 +22,14 @@ const MediumGrid = (props: IGridProps) => {
         }, [])
         .reverse()
         .map((rowItems, i) => (
-          <Grid key={i} gap={"8px"} templateColumns={`repeat(${rowItems.length}, 1fr)`}>
+          <Box
+            sx={{
+              display: "grid",
+              gap: "8px",
+              templateColumns: `repeat(${rowItems.length}, 1fr)`,
+            }}
+            key={i}
+          >
             {rowItems.reverse().map(({ imageUrl, slug }, index) =>
               imageUrl ? (
                 <motion.div
@@ -41,30 +47,36 @@ const MediumGrid = (props: IGridProps) => {
                     src={imageUrl}
                     alt={slug}
                     height="100%"
-                    objectFit={"cover"}
-                    fallbackSrc="/plain-gray.jpg"
+                    sx={{
+                      objectFit: "cover",
+                    }}
                   />
                 </motion.div>
               ) : (
                 <Box bg="#F1F3F5" h="full" w="full" />
               )
             )}
-          </Grid>
+          </Box>
         ))}
-    </VStack>
+    </Stack>
   ) : (
-    <Grid
-      gap={"8px"}
-      templateColumns="repeat(8, 1fr)"
-      templateRows="repeat(7, 1fr)"
-      height="100%"
-      maxHeight="601px"
+    <Box
+      sx={{
+        display: "grid",
+        gap: "8px",
+        templateColumns: "repeat(8, 1fr)",
+        templateRows: "repeat(7, 1fr)",
+        height: "100%",
+        maxHeight: "601px",
+      }}
     >
       {changelogs.slice(0, 9).map(({ imageUrl, slug, publishedAt }, index) => (
-        <GridItem
+        <Box
           key={index}
-          rowSpan={[0, 2, 3].includes(index) ? 3 : 2}
-          colSpan={[1, 3, 6].includes(index) ? 4 : 2}
+          sx={{
+            rowSpan: [0, 2, 3].includes(index) ? 3 : 2,
+            colSpan: [1, 3, 6].includes(index) ? 4 : 2,
+          }}
         >
           <motion.div
             layoutId={index === 0 && props.isFirstItem ? slug : ``}
@@ -81,12 +93,10 @@ const MediumGrid = (props: IGridProps) => {
               alt={slug}
               height="100%"
               width="100%"
-              objectFit={"cover"}
-              fallback={
-                <Box overflow="hidden" width="100%">
-                  <Skeleton height={[0, 2, 3].includes(index) ? "253px" : "166px"} width="3000px" />
-                </Box>
-              }
+              sx={{
+                cursor: "pointer",
+                objectFit: "cover",
+              }}
               onClick={() => {
                 const date = dayjs(publishedAt);
                 const targetDate = date.format("MMM YYYY");
@@ -97,9 +107,9 @@ const MediumGrid = (props: IGridProps) => {
               }}
             />
           </motion.div>
-        </GridItem>
+        </Box>
       ))}
-    </Grid>
+    </Box>
   );
 };
 

@@ -13,13 +13,12 @@
     "changelog:generate": "node ./bin/changelog.js"
   },
   "dependencies": {
-    "@chakra-ui/icons": "^1.1.7",
-    "@chakra-ui/react": "^1.8.5",
-    "@chakra-ui/theme-tools": "^1.3.6",
-    "@emotion/react": "^11.8.1",
+    "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.8.1",
     "@fontsource/ibm-plex-sans": "^4.5.4",
     "@fontsource/inter": "^4.5.4",
+    "@mantine/core": "^6.0.16",
+    "@mantine/hooks": "^6.0.16",
     "@mdx-js/loader": "^2.2.1",
     "@mdx-js/react": "^2.2.1",
     "@next/mdx": "^13.0.7",

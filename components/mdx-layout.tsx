@@ -1,46 +1,59 @@
-import React from 'react';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
-import Head from 'next/head';
-import usePreviousPageUrl from 'lib/state/use-previous-page-url-store';
-import { MdxMeta } from 'lib/models/mdx-meta';
-import { motion } from 'framer-motion';
-import dayjs from 'dayjs';
-import { ReactNode } from '@mdx-js/react/lib';
-import { MDXProvider } from '@mdx-js/react';
-import {
-  Box,
-  Flex,
-  Heading,
-  Image,
-  ListItem,
-  OrderedList,
-  Text,
-  UnorderedList,
-  VStack,
-} from '@chakra-ui/react';
-import Timeline from './layout/timeline';
-import { MainLayout } from './layout/main-layout';
-import { Contributors } from './core/contributors';
+import dayjs from "dayjs";
+import React from "react";
+import Link from "next/link";
+import Head from "next/head";
+import { motion } from "framer-motion";
+import { useRouter } from "next/router";
+
+import { MdxMeta } from "lib/models/mdx-meta";
+import { ReactNode } from "@mdx-js/react/lib";
+import { MDXProvider } from "@mdx-js/react";
+import usePreviousPageUrl from "lib/state/use-previous-page-url-store";
+import { Box, Flex, Image, List, Stack, Text, Title } from "@mantine/core";
+
+import Timeline from "./layout/timeline";
+import { MainLayout } from "./layout/main-layout";
+import { Contributors } from "./core/contributors";
 
 import type { MDXComponents } from "mdx/types";
+
 const components: MDXComponents = {
-  h1: (props) => <Heading as="h1" fontSize={["2xl", "2xl", "32px"]} color="#000" {...props} />,
-  h2: (props) => <Text fontWeight="bold" fontSize="xl" mt={12} mb={6} {...props} />,
-  p: (props) => <Text my={6} color="#495057" fontSize="16px" lineHeight="24px" {...props} />,
+  // @ts-expect-error
+  h1: (props) => <Title size={1} color="#000" {...props} />,
+  // @ts-expect-error
+  h2: (props) => <Text fw="bold" size="xl" mt={12} mb={6} {...props} />,
+  p: (props) => (
+    // @ts-expect-error
+    <Text
+      my={6}
+      color="#495057"
+      size="sm"
+      sx={{
+        lineHeight: "24px",
+      }}
+      {...props}
+    />
+  ),
   a: (props) => (
-    <Text as="a" href={props.href} rel="noopener noreferrer" color="#6868F7" fontWeight="bold">
+    <Text component="a" href={props.href} rel="noopener noreferrer" color="#6868F7" fw="bold">
       {props.children}
     </Text>
   ),
-  ul: (props) => <UnorderedList spacing={4} {...props} />,
-  ol: (props) => <OrderedList spacing={4} {...props} />,
+  // @ts-expect-error
+  ul: (props) => <List spacing={4} {...props} />,
+  // @ts-expect-error
+  ol: (props) => <List spacing={4} {...props} />,
   li: (props) => (
-    <ListItem
+    // @ts-expect-error
+    <List.Item
       color="#495057"
-      lineHeight="32px"
-      fontSize="16px"
-      _before={{ content: "unset" }}
+      sx={{
+        fontSize: "16px",
+        lineHeight: "32px",
+        ":before": {
+          content: "unset",
+        },
+      }}
       {...props}
     />
   ),
@@ -97,7 +110,9 @@ export const MdxLayout = (props: MdxLayoutProps) => {
         src={props.meta.headerImage}
         alt={props.meta.title}
         height="100%"
-        objectFit={"cover"}
+        sx={{
+          objectFit: "cover",
+        }}
       />
     );
   }
@@ -138,32 +153,34 @@ export const MdxLayout = (props: MdxLayoutProps) => {
         date={dayjs(props.meta.publishedAt).format("MMM DD YYYY")}
         className={`timeline-month-${dayjs(props.meta.publishedAt).format("MM")}`}
       >
-        <Box
-          // mt={!props.hideLayout && [86, 86, 140]}
-          // maxW="4xl"
-          // mx="auto"
-          width={["100%", "100%", "682px"]}
-          // w="100%"
-          maxW="682px"
-          // px={defaultPx(32)}
-        >
+        <Box w="100%" maw="682px">
           {/* Article header */}
-          <VStack align="start" spacing={[4, 4, 6]}>
+          <Stack
+            align="start"
+            sx={(t) => ({
+              gap: 4,
+              [t.breakpoints.lg]: {
+                gap: 6,
+              },
+            })}
+          >
             {props.tags !== undefined && (
               <Flex gap={2}>
                 {props.tags?.map((tag, index) => (
                   <Box
-                    height="22px"
+                    h="22px"
                     bg="#F1F3F5"
                     color="#0D131B"
-                    fontSize="14px"
-                    borderRadius="full"
                     px={2}
-                    lineHeight="21px"
-                    fontWeight={500}
-                    position="relative"
                     top="-8px"
                     mb="-10px"
+                    sx={{
+                      position: "relative",
+                      fontWeight: 500,
+                      lineHeight: "21px",
+                      borderRadius: "full",
+                      fontSize: "14px",
+                    }}
                   >
                     {tag}
                   </Box>
@@ -185,28 +202,17 @@ export const MdxLayout = (props: MdxLayoutProps) => {
                   src={props.meta.headerImage}
                   alt={props.meta.title}
                   w="full"
-                  height={["100%", "100%", "360px"]}
-                  objectFit={"cover"}
-                  cursor={props.hideLayout ? "pointer" : "default"}
-                  _hover={{
-                    // apply underline on hover to the next first .article-title
-                    // "& + .article-title": {
-                    //   textDecoration: "underline",
-                    // },
-                    boxShadow: props.hideLayout ? "0px 2px 4px 0px rgba(0, 0, 0, 0.1)" : "",
-                  }}
-                  fallback={
-                    props.isInfiniteScrollingView ? (
-                      <Box height={["100%", "100%", "360px"]} />
-                    ) : (
-                      <Image
-                        src="/plain-gray.jpg"
-                        height={["100%", "100%", "360px"]}
-                        objectFit={"cover"}
-                        w="full"
-                      />
-                    )
-                  }
+                  sx={(t) => ({
+                    height: "100%",
+                    [t.breakpoints.lg]: {
+                      height: "360px",
+                    },
+                    objectFit: "cover",
+                    cursor: props.hideLayout ? "pointer" : "default",
+                    ":hover": {
+                      boxShadow: props.hideLayout ? "0px 2px 4px 0px rgba(0, 0, 0, 0.1)" : "",
+                    },
+                  })}
                 />
               ) : (
                 <Link href={`/changelogs/${props.meta.slug}`}>
@@ -214,28 +220,17 @@ export const MdxLayout = (props: MdxLayoutProps) => {
                     src={props.meta.headerImage}
                     alt={props.meta.title}
                     w="full"
-                    height={["100%", "100%", "360px"]}
-                    objectFit={"cover"}
-                    cursor={props.hideLayout ? "pointer" : "default"}
-                    _hover={{
-                      // apply underline on hover to the next first .article-title
-                      // "& + .article-title": {
-                      //   textDecoration: "underline",
-                      // },
-                      boxShadow: props.hideLayout ? "0px 2px 4px 0px rgba(0, 0, 0, 0.1)" : "",
-                    }}
-                    fallback={
-                      props.isInfiniteScrollingView ? (
-                        <Box height={["100%", "100%", "360px"]} />
-                      ) : (
-                        <Image
-                          src="/plain-gray.jpg"
-                          height={["100%", "100%", "360px"]}
-                          objectFit={"cover"}
-                          w="full"
-                        />
-                      )
-                    }
+                    sx={(t) => ({
+                      height: "100%",
+                      [t.breakpoints.lg]: {
+                        height: "360px",
+                      },
+                      objectFit: "cover",
+                      cursor: props.hideLayout ? "pointer" : "default",
+                      ":hover": {
+                        boxShadow: props.hideLayout ? "0px 2px 4px 0px rgba(0, 0, 0, 0.1)" : "",
+                      },
+                    })}
                     onClick={() => {
                       setPrevUrl(router.asPath);
                     }}
@@ -249,15 +244,22 @@ export const MdxLayout = (props: MdxLayoutProps) => {
             >
               {isInBlogPage ? (
                 <h1
-                  className={`article-title text-gray-900 font-hero text-[24px] leading-[32px] font-bold ${props.hideLayout ? 'cursor-pointer hover:underline underline-offset-[3px]' : 'cursor-text hover:no-underline'}`}
-                  
+                  className={`article-title text-gray-900 font-hero text-[24px] leading-[32px] font-bold ${
+                    props.hideLayout
+                      ? "cursor-pointer hover:underline underline-offset-[3px]"
+                      : "cursor-text hover:no-underline"
+                  }`}
                 >
                   {props.meta.title}
                 </h1>
               ) : (
                 <Link href={`/changelogs/${props.meta.slug}`}>
                   <h2
-                    className={`article-title text-gray-900 font-hero text-[24px] leading-[32px] font-bold ${props.hideLayout ? 'cursor-pointer hover:underline underline-offset-[3px]' : 'cursor-text hover:no-underline'}`}   
+                    className={`article-title text-gray-900 font-hero text-[24px] leading-[32px] font-bold ${
+                      props.hideLayout
+                        ? "cursor-pointer hover:underline underline-offset-[3px]"
+                        : "cursor-text hover:no-underline"
+                    }`}
                     onClick={() => {
                       setPrevUrl(router.asPath);
                     }}
@@ -267,17 +269,13 @@ export const MdxLayout = (props: MdxLayoutProps) => {
                 </Link>
               )}
             </motion.div>
-          </VStack>
+          </Stack>
           {/* Article content */}
           <motion.div
             initial={{ opacity: 0, y: props.hideLayout ? 0 : 20 }}
             animate={{ opacity: 1, y: 0, transition: { duration: 0.4, delay: 0.2 } }}
           >
-            <div
-              className="pb-16 text-lg leading-8 text-gray-700 font-hero"
-            >
-              {props.children}
-            </div>
+            <div className="pb-16 text-lg leading-8 text-gray-700 font-hero">{props.children}</div>
           </motion.div>
           {/* Article authors */}
           {!props.hideAuthors && <Contributors authors={props.meta.authors} />}

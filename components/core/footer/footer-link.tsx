@@ -1,6 +1,6 @@
-import { Text, TextProps } from "@chakra-ui/react";
 import React, { ReactNode } from "react";
 import Link from "next/link";
+import { Text, TextProps } from "@mantine/core";
 
 type Props = {
   title: string | ReactNode;
@@ -24,7 +24,7 @@ export function FooterLink({ type = "internal", href = "", ...props }: Props) {
     <Wrapper>
       {typeof props.title === "string" ? (
         <Text
-          as={type === "text" ? "p" : "a"}
+          component={type === "text" ? "p" : "a"}
           color={props.mode === "dark" ? "white" : "landing.gray"}
           {...(type === "external" && { href })}
           {...props.style}

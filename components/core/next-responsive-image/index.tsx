@@ -1,6 +1,6 @@
-import { Box, BoxProps } from "@chakra-ui/react";
 import React from "react";
 import NextImage, { ImageProps } from "next/image";
+import { Box, BoxProps } from "@mantine/core";
 
 export interface NextResponsiveImageProps extends BoxProps {
   src: ImageProps["src"];
@@ -17,7 +17,12 @@ export const NextResponsiveImage = ({
   ...boxProps
 }: NextResponsiveImageProps) => {
   return (
-    <Box {...boxProps} position="relative">
+    <Box
+      {...boxProps}
+      sx={{
+        position: "relative",
+      }}
+    >
       <NextImage src={src} alt={alt} layout="fill" objectFit={fit || "contain"} {..._nextImage} />
     </Box>
   );

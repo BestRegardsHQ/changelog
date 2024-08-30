@@ -1,4 +1,4 @@
-import { Avatar, Flex, HStack, Text } from '@chakra-ui/react';
+import { Avatar, Flex, Group, Text } from "@mantine/core";
 
 interface ContributorProps {
   avatarUrl?: string;
@@ -6,18 +6,14 @@ interface ContributorProps {
   description: string;
 }
 
-export function Contributor({
-  avatarUrl,
-  name,
-  description,
-}: ContributorProps) {
+export function Contributor({ avatarUrl, name, description }: ContributorProps) {
   return (
-    <HStack spacing={4}>
+    <Group spacing={4}>
       {!!avatarUrl && <Avatar src={avatarUrl} />}
       <Flex direction="column" align="flex-start" justify="center">
-        <Text fontWeight="semibold">{name}</Text>
+        <Text fw="semibold">{name}</Text>
         <Text color="gray.700">{description}</Text>
       </Flex>
-    </HStack>
+    </Group>
   );
 }

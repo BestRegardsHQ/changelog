@@ -1,15 +1,16 @@
 import React from "react";
 import { useRouter } from "next/router";
-import useTimelineStore from "lib/state/use-timeline-store";
-import { IAggregatedChangelogs, IImagePreviewMeta } from "lib/models/view";
-import { getArticleSlugs } from "lib/get-articles-slugs";
-import { generateRssFeed } from "lib/generate-rss-feed";
-import { generateLatestChangelogsJson } from "lib/generate-latest-json";
+import { SegmentedControl } from "@mantine/core";
+
 import Years from "components/layout/years";
 import Weeks from "components/layout/weeks";
 import Months from "components/layout/months";
+import { generateRssFeed } from "lib/generate-rss-feed";
+import { getArticleSlugs } from "lib/get-articles-slugs";
 import { MainLayout } from "components/layout/main-layout";
-import { TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import useTimelineStore from "lib/state/use-timeline-store";
+import { generateLatestChangelogsJson } from "lib/generate-latest-json";
+import { IAggregatedChangelogs, IImagePreviewMeta } from "lib/models/view";
 
 const ITEMS_PER_PAGE = 4;
 
@@ -19,10 +20,14 @@ export interface IPageProps {
   totalItems: { weeks: number; months: number; years: number };
 }
 
+type TimelineView = "weeks" | "months" | "years";
+
 const Page = ({ slugs, changelogsMap, totalItems }: IPageProps) => {
   const timeline = useTimelineStore();
   const router = useRouter();
   const page = parseInt((router.query?.page || "0") as string);
+
+  const [timelineView, setTimelineView] = React.useState<TimelineView>("weeks");
 
   React.useEffect(() => {
     if (typeof window !== "undefined") {
@@ -44,33 +49,32 @@ const Page = ({ slugs, changelogsMap, totalItems }: IPageProps) => {
         years: totalItems.years,
       }}
     >
-      <Tabs
-        isLazy
-        lazyBehavior="keepMounted"
-        isFitted
-        index={timeline.view === "weeks" ? 0 : timeline.view === "months" ? 1 : 2}
-        onChange={(index) => {
-          if (index === 0) {
-            timeline.setView("weeks");
-          } else if (index === 1) {
-            timeline.setView("months");
-          } else if (index === 2) {
-            timeline.setView("years");
-          }
+      <SegmentedControl
+        value={timelineView}
+        onChange={(value: TimelineView) => {
+          setTimelineView(value);
         }}
-      >
-        <TabPanels>
-          <TabPanel padding={0}>
-            <Weeks slugs={slugs} />
-          </TabPanel>
-          <TabPanel padding={0}>
-            <Months monthChangelogsMap={changelogsMap.months} />
-          </TabPanel>
-          <TabPanel padding={0}>
-            <Years yearChangelogsMap={changelogsMap.years} />
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+        data={[
+          { label: "Weeks", value: "weeks" },
+          { label: "Months", value: "months" },
+          { label: "Years", value: "years" },
+        ]}
+      />
+
+      {(() => {
+        switch (timelineView) {
+          case "weeks":
+            return <Weeks slugs={slugs} />;
+
+          case "months":
+            return <Months monthChangelogsMap={changelogsMap.months} />;
+
+          case "years":
+            return <Years yearChangelogsMap={changelogsMap.years} />;
+          default:
+            break;
+        }
+      })()}
     </MainLayout>
   );
 };

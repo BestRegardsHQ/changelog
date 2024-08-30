@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem, HStack, Image, Skeleton, VStack } from "@chakra-ui/react";
+import { Box, Group, Image, Stack } from "@mantine/core";
 import dayjs from "dayjs";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
@@ -7,14 +7,17 @@ import LargeSubGrid from "./large-sub-grid";
 
 const LargeGrid = (props: IGridProps) => {
   const { changelogs } = props;
-  const router = useRouter()
+  const router = useRouter();
 
   return (
-    <Grid
-      gap={"2px"}
-      templateColumns="repeat(1, 1fr)"
-      templateRows={`repeat(${Math.floor(changelogs.slice(0, 27).length / 9)}, 1fr)`}
-      height="100%"
+    <Box
+      sx={{
+        gap: "2px",
+        display: "grid",
+        height: "100%",
+        templateColumns: "repeat(1, 1fr)",
+        templateRows: `repeat(${Math.floor(changelogs.slice(0, 27).length / 9)}, 1fr)`,
+      }}
     >
       {changelogs
         .slice(0, 27)
@@ -28,8 +31,13 @@ const LargeGrid = (props: IGridProps) => {
           return result;
         }, [])
         .map((rowItems, i) => (
-          <GridItem rowSpan={1} key={i}>
-            <HStack spacing="2px">
+          <Box
+            key={i}
+            sx={{
+              rowSpan: 1,
+            }}
+          >
+            <Group spacing="2px">
               {i % 2 === 0 && (
                 <>
                   <motion.div
@@ -46,15 +54,10 @@ const LargeGrid = (props: IGridProps) => {
                       alt={rowItems[0].slug}
                       h="198px"
                       w={rowItems.length === 1 ? "100%" : "282px"}
-                      objectFit={"cover"}
-                      fallback={
-                        <Box overflow="hidden">
-                          <Skeleton
-                            height="198px"
-                            width={rowItems.length === 1 ? "100%" : "282px"}
-                          />
-                        </Box>
-                      }
+                      sx={{
+                        objectFit: "cover",
+                        cursor: "pointer",
+                      }}
                       onClick={() => {
                         const date = dayjs(rowItems[0].publishedAt);
                         const targetDate = date.format("MMM YYYY");
@@ -65,7 +68,7 @@ const LargeGrid = (props: IGridProps) => {
                       }}
                     />
                   </motion.div>
-                  <VStack spacing="2px">
+                  <Stack spacing="2px">
                     {rowItems
                       .slice(1, rowItems.length)
                       .reduce((result, item, index) => {
@@ -84,12 +87,12 @@ const LargeGrid = (props: IGridProps) => {
                           rowLength={rowItems.length}
                         />
                       ))}
-                  </VStack>
+                  </Stack>
                 </>
               )}
               {i % 2 === 1 && (
                 <>
-                  <VStack spacing="2px">
+                  <Stack spacing="2px">
                     {rowItems
                       .slice(0, rowItems.length - 1)
                       .reduce((result, item, index) => {
@@ -108,18 +111,16 @@ const LargeGrid = (props: IGridProps) => {
                           rowLength={rowItems.length}
                         />
                       ))}
-                  </VStack>
+                  </Stack>
                   <Image
                     src={rowItems[rowItems.length - 1].imageUrl}
                     alt={rowItems[rowItems.length - 1].slug}
                     h="198px"
                     w={rowItems.length === 1 ? "100%" : "282px"}
-                    objectFit={"cover"}
-                    fallback={
-                      <Box overflow="hidden">
-                        <Skeleton height="198px" width={rowItems.length === 1 ? "100%" : "282px"} />
-                      </Box>
-                    }
+                    sx={{
+                      cursor: "pointer",
+                      objectFit: "cover",
+                    }}
                     onClick={() => {
                       const date = dayjs(rowItems[rowItems.length - 1].publishedAt);
                       const targetDate = date.format("MMM YYYY");
@@ -131,10 +132,10 @@ const LargeGrid = (props: IGridProps) => {
                   />
                 </>
               )}
-            </HStack>
-          </GridItem>
+            </Group>
+          </Box>
         ))}
-    </Grid>
+    </Box>
   );
 };
 

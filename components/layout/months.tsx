@@ -1,12 +1,14 @@
-import LazyLoad from 'react-lazyload';
-import React from 'react';
-import { useRouter } from 'next/router';
-import { IAggregatedChangelogs, IImagePreviewMeta } from 'lib/models/view';
-import { motion } from 'framer-motion';
-import dayjs from 'dayjs';
-import MoreItems from 'components/core/more-items';
-import { Box, Grid, HStack, Image, VStack } from '@chakra-ui/react';
-import Timeline from './timeline';
+import React from "react";
+import dayjs from "dayjs";
+import LazyLoad from "react-lazyload";
+import { motion } from "framer-motion";
+import { useRouter } from "next/router";
+import { Box, Group, Image, Stack } from "@mantine/core";
+
+import MoreItems from "components/core/more-items";
+import { IAggregatedChangelogs, IImagePreviewMeta } from "lib/models/view";
+
+import Timeline from "./timeline";
 
 interface IMonthsProps {
   monthChangelogsMap: IAggregatedChangelogs;
@@ -76,40 +78,55 @@ const Months = ({ monthChangelogsMap, isInfiniteScrollingView }: IMonthsProps) =
           >
             <Box
               display="flex"
-              paddingBottom={index === sortedChangelogsArrayByMonth.length - 1 ? 0 : [12, 16, 20]}
+              pb={
+                index === sortedChangelogsArrayByMonth.length - 1
+                  ? 0
+                  : {
+                      xs: "12px",
+                      sm: "16px",
+                      md: "20px",
+                    }
+              }
+              sx={{}}
             >
-              <VStack
-                borderRadius={"16px"}
-                overflow="hidden"
-                cursor="pointer"
+              <Stack
+                sx={{
+                  cursor: "pointer",
+                  overflow: "hidden",
+                  borderRadius: "16px",
+                }}
               >
                 <Box
-                  height={["100%", "100%", "360px"]}
-                  width={["100%", "100%", "682px"]}
-                  maxWidth={"682px"}
-                  display="flex"
-                  onClick={() => {}}
-                  position="relative"
-                  _hover={{
-                    "& img": {
-                      boxShadow: "0px 2px 4px 0px rgba(0, 0, 0, 0.1)",
+                  sx={(t) => ({
+                    height: "100%",
+                    [t.breakpoints.lg]: {
+                      height: "360px",
+                      width: "682px",
                     },
-                  }}
-                  sx={{
+                    objectFit: "cover",
+                    maxWidth: "682px",
+                    position: "relative",
                     "& img": {
                       transition: "box-shadow 0.3s",
                     },
-                  }}
+                    "&:hover img": {
+                      boxShadow: "0px 2px 4px 0px rgba(0, 0, 0, 0.1)",
+                    },
+                  })}
+                  display="flex"
+                  onClick={() => {}}
                 >
                   <LazyLoad height="100%" once>
                     {changelogs.length > 3 && <MoreItems numberOfItems={changelogs.length - 3} />}
                     {changelogs.length <= 2 ? (
-                      <Grid
-                        gap={"8px"}
-                        templateColumns={
-                          changelogs.length === 1 ? "repeat(1, 1fr)" : "repeat(2, 1fr)"
-                        }
-                        height="100%"
+                      <Box
+                        sx={{
+                          display: "grid",
+                          gap: "8px",
+                          templateColumns:
+                            changelogs.length === 1 ? "repeat(1, 1fr)" : "repeat(2, 1fr)",
+                        }}
+                        h="100%"
                       >
                         {changelogs.map(({ imageUrl, slug, publishedAt }, index) => (
                           <Box key={index}>
@@ -128,11 +145,21 @@ const Months = ({ monthChangelogsMap, isInfiniteScrollingView }: IMonthsProps) =
                               <Image
                                 src={imageUrl}
                                 alt={`${Object.keys(monthChangelogsMap)[index]} - ${index}`}
-                                objectFit={"cover"}
-                                minHeight={["176px", "100%", "360px"]}
-                                width={["100%", "100%", "682px"]}
-                                height={["100%", "100%", "360px"]}
-                                fallbackSrc="/plain-gray.jpg"
+                                sx={(t) => ({
+                                  height: "100%",
+                                  width: "100%",
+                                  minHeight: "100%",
+                                  objectFit: "cover",
+                                  cursor: "pointer",
+                                  [t.breakpoints.md]: {
+                                    height: "176px",
+                                  },
+                                  [t.breakpoints.lg]: {
+                                    height: "360px",
+                                    minHeight: "360px",
+                                    width: "682px",
+                                  },
+                                })}
                                 onClick={() => {
                                   handleFindWeekChangelog(publishedAt);
                                 }}
@@ -140,9 +167,9 @@ const Months = ({ monthChangelogsMap, isInfiniteScrollingView }: IMonthsProps) =
                             </motion.div>
                           </Box>
                         ))}
-                      </Grid>
+                      </Box>
                     ) : (
-                      <HStack height="100%">
+                      <Group h="100%">
                         <motion.div
                           layoutId={
                             index === 0 && isInfiniteScrollingView ? changelogs[0]?.slug : ``
@@ -160,40 +187,51 @@ const Months = ({ monthChangelogsMap, isInfiniteScrollingView }: IMonthsProps) =
                           <Image
                             src={changelogs[0]?.imageUrl}
                             alt={`${Object.keys(monthChangelogsMap)[index]} - ${0}`}
-                            objectFit={"cover"}
-                            minHeight={["176px", "176px", "360px"]}
-                            minWidth={["176px"]}
-                            height="100%"
-                            width={["100%", "100%", "682px"]}
-                            fallbackSrc="/plain-gray.jpg"
+                            h="100%"
+                            sx={(t) => ({
+                              minWidth: "176px",
+                              width: "100%",
+                              objectFit: "cover",
+                              minHeight: "176px",
+                              [t.breakpoints.lg]: {
+                                width: "682px",
+                              },
+                              cursor: "pointer",
+                            })}
                             onClick={() => {
                               handleFindWeekChangelog(changelogs[0].publishedAt);
                             }}
                           />
                         </motion.div>
-                        <VStack height="100%">
+                        <Stack h="100%">
                           {changelogs.slice(1, 3).map(({ imageUrl, publishedAt }, index) => (
                             <Image
                               key={index}
                               src={imageUrl}
                               alt={`${Object.keys(monthChangelogsMap)[index]} - ${index}`}
-                              objectFit={"cover"}
-                              maxHeight="176px"
-                              height={["88px", "176px", "176px"]}
-                              width={["88px", "176px", "176px"]}
-                              maxWidth={["176px"]}
-                              fallbackSrc="/plain-gray.jpg"
+                              mah="176px"
+                              maw="176px"
+                              sx={(t) => ({
+                                height: "88px",
+                                width: "88px",
+                                objectFit: "cover",
+                                [t.breakpoints.md]: {
+                                  height: "176px",
+                                  width: "176px",
+                                },
+                                cursor: "pointer",
+                              })}
                               onClick={() => {
                                 handleFindWeekChangelog(publishedAt);
                               }}
                             />
                           ))}
-                        </VStack>
-                      </HStack>
+                        </Stack>
+                      </Group>
                     )}
                   </LazyLoad>
                 </Box>
-              </VStack>
+              </Stack>
             </Box>
           </motion.div>
         </Timeline>

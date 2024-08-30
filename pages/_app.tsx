@@ -1,4 +1,3 @@
-import { ChakraProvider } from "@chakra-ui/react";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 
@@ -20,15 +19,24 @@ import "@fontsource/inter/800.css";
 import "@fontsource/inter/900.css";
 import "styles/global.css";
 
-import juneTheme from "../lib/theme";
+import { MantineProvider } from "@mantine/core";
 
 dayjs.extend(advancedFormat);
 
 const MyApp = ({ Component, pageProps }) => {
   return (
-    <ChakraProvider theme={juneTheme}>
+    <MantineProvider
+      theme={{
+        primaryColor: "green",
+        colorScheme: "dark",
+        defaultRadius: "md",
+        transitionTimingFunction: "ease-in-out",
+      }}
+      withGlobalStyles
+      withNormalizeCSS
+    >
       <Component {...pageProps} />
-    </ChakraProvider>
+    </MantineProvider>
   );
 };
 

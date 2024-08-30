@@ -1,10 +1,11 @@
-import BackButton from "components/core/timeline/back-button";
 import { motion } from "framer-motion";
-import usePageStatusStore from "lib/state/use-page-status-store";
 import { useRouter } from "next/router";
+import { useMediaQuery } from "@mantine/hooks";
 import { ReactNode, useEffect, useState } from "react";
+import { Box, Group, Stack, Text } from "@mantine/core";
 
-import { Box, HStack, Text, useMediaQuery, VStack } from "@chakra-ui/react";
+import usePageStatusStore from "lib/state/use-page-status-store";
+import BackButton from "components/core/timeline/back-button";
 import usePreviousPageUrl from "lib/state/use-previous-page-url-store";
 
 export interface TimelineProps {
@@ -20,7 +21,7 @@ const Timeline = (props: TimelineProps) => {
 
   const router = useRouter();
   const pageStatus = usePageStatusStore();
-  const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
+  const isLargerThan768 = useMediaQuery("(min-width: 768px)");
 
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
@@ -28,24 +29,43 @@ const Timeline = (props: TimelineProps) => {
   }, [router.pathname, isLargerThan768]);
 
   return (
-    <HStack
+    <Group
       id={props.id}
       className={props.className}
       display="flex"
-      position="relative"
-      justifyContent="center"
-      alignItems="start"
       spacing={0}
       pt={isOpen ? (isLargerThan768 ? 28 : 8) : 0}
       px={isOpen ? 4 : 0}
-      minWidth={["100%", "100%", "834px"]}
-      visibility={pageStatus.isLoading ? "hidden" : "visible"}
+      sx={(t) => ({
+        minWidth: "100%",
+        alignItems: "start",
+        position: "relative",
+        justifyContent: "center",
+        visibility: pageStatus.isLoading ? "hidden" : "visible",
+
+        [t.breakpoints.lg]: {
+          minWidth: "834px",
+        },
+      })}
     >
       {isLargerThan768 && (
-        <VStack position="relative" top={isOpen ? "" : "-8px"} width="120px" spacing={4}>
+        <Stack
+          top={isOpen ? "" : "-8px"}
+          w="120px"
+          spacing={4}
+          sx={{
+            position: "relative",
+          }}
+        >
           {isOpen && <BackButton />}
 
-          <Text fontSize="16px" color="#868E96" alignItems="start" width="125px">
+          <Text
+            color="#868E96"
+            w="125px"
+            sx={{
+              alignItems: "start",
+            }}
+          >
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -54,14 +74,16 @@ const Timeline = (props: TimelineProps) => {
               {date}
             </motion.div>
           </Text>
-        </VStack>
+        </Stack>
       )}
-      <HStack
-        alignItems="start"
+      <Group
         spacing={isOpen ? 0 : 8}
         display="relative"
         id={date.replace(/[\s_]+/g, "-").toLowerCase()}
         className="timeline-item"
+        sx={{
+          alignItems: "start",
+        }}
       >
         {!isOpen && (
           <motion.div
@@ -100,19 +122,34 @@ const Timeline = (props: TimelineProps) => {
             />
           </motion.div>
         )}
-        <VStack alignItems="start" spacing={[0, 0, 2]}>
+        <Stack
+          sx={(t) => ({
+            alignItems: "start",
+            gap: 0,
+            [t.breakpoints.lg]: {
+              gap: 2,
+            },
+          })}
+        >
           {!isLargerThan768 && (
-            <VStack position="relative" top="-8px" spacing={4} mb={[4, 4]}>
+            <Stack
+              top="-8px"
+              spacing={4}
+              mb={4}
+              sx={{
+                position: "relative",
+              }}
+            >
               {isOpen && <BackButton />}
-              <Text fontSize="16px" color="#868E96" alignItems="start" width="full">
+              <Text color="#868E96" w="full">
                 {date}
               </Text>
-            </VStack>
+            </Stack>
           )}
           {children}
-        </VStack>
-      </HStack>
-    </HStack>
+        </Stack>
+      </Group>
+    </Group>
   );
 };
 
