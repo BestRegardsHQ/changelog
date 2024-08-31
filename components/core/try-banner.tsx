@@ -1,22 +1,18 @@
 import React from "react";
-import Link from "next/link";
 import {
-  Box,
-  Button,
-  Center,
-  Container,
   em,
-  getBreakpointValue,
+  Box,
+  Text,
   Group,
   Image,
   Space,
-  Stack,
-  Text,
-  Title,
+  Button,
+  Center,
+  Container,
   useMantineTheme,
+  getBreakpointValue,
 } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
-import { TranslucentButton } from "./transluscent-button";
 
 function TryJuneBanner() {
   const theme = useMantineTheme();
