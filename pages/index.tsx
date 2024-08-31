@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { SegmentedControl } from "@mantine/core";
+import { Center, SegmentedControl, Space, Stack, Text, Title } from "@mantine/core";
 
 import Years from "components/layout/years";
 import Weeks from "components/layout/weeks";
@@ -39,6 +39,8 @@ const Page = ({ slugs, changelogsMap, totalItems }: IPageProps) => {
     }
   }, [timeline.view]);
 
+  const isInBlogPage = router.pathname.startsWith("/changelogs/");
+
   return (
     <MainLayout
       page={page}
@@ -49,17 +51,50 @@ const Page = ({ slugs, changelogsMap, totalItems }: IPageProps) => {
         years: totalItems.years,
       }}
     >
-      <SegmentedControl
-        value={timelineView}
-        onChange={(value: TimelineView) => {
-          setTimelineView(value);
-        }}
-        data={[
-          { label: "Weeks", value: "weeks" },
-          { label: "Months", value: "months" },
-          { label: "Years", value: "years" },
-        ]}
-      />
+      <Space h="xl" />
+
+      <Center>
+        <SegmentedControl
+          size="md"
+          value={timelineView}
+          onChange={(value: TimelineView) => {
+            setTimelineView(value);
+          }}
+          data={[
+            { label: "Weeks", value: "weeks" },
+            { label: "Months", value: "months" },
+            { label: "Years", value: "years" },
+          ]}
+        />
+      </Center>
+
+      {!isInBlogPage && (
+        <Stack spacing="sm">
+          <Space h="xl" />
+
+          <Title
+            order={1}
+            sx={{
+              fontSize: "4rem",
+            }}
+          >
+            Changelog
+          </Title>
+          <Text
+            size="lg"
+            color="dimmed"
+            sx={{
+              fontWeight: 500,
+            }}
+          >
+            New features, improvements, and fixes every week
+          </Text>
+        </Stack>
+      )}
+
+      <Space h="xl" />
+      <Space h="xl" />
+      <Space h="xl" />
 
       {(() => {
         switch (timelineView) {
@@ -71,6 +106,7 @@ const Page = ({ slugs, changelogsMap, totalItems }: IPageProps) => {
 
           case "years":
             return <Years yearChangelogsMap={changelogsMap.years} />;
+
           default:
             break;
         }

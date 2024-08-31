@@ -22,6 +22,7 @@
     "@mdx-js/loader": "^2.2.1",
     "@mdx-js/react": "^2.2.1",
     "@next/mdx": "^13.0.7",
+    "@tabler/icons-react": "^3.14.0",
     "dayjs": "^1.10.7",
     "extracted-loader": "^1.0.7",
     "feed": "^4.2.2",

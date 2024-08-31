@@ -9,7 +9,7 @@ import { MdxMeta } from "lib/models/mdx-meta";
 import { ReactNode } from "@mdx-js/react/lib";
 import { MDXProvider } from "@mdx-js/react";
 import usePreviousPageUrl from "lib/state/use-previous-page-url-store";
-import { Box, Flex, Image, List, Stack, Text, Title } from "@mantine/core";
+import { Anchor, Box, Flex, Image, List, Space, Stack, Text, Title } from "@mantine/core";
 
 import Timeline from "./layout/timeline";
 import { MainLayout } from "./layout/main-layout";
@@ -19,40 +19,42 @@ import type { MDXComponents } from "mdx/types";
 
 const components: MDXComponents = {
   // @ts-expect-error
-  h1: (props) => <Title size={1} color="#000" {...props} />,
+  h1: (props) => <Title order={1} {...props} />,
   // @ts-expect-error
-  h2: (props) => <Text fw="bold" size="xl" mt={12} mb={6} {...props} />,
+  h2: (props) => <Title order={2} {...props} />,
   p: (props) => (
     // @ts-expect-error
-    <Text
-      my={6}
-      color="#495057"
-      size="sm"
-      sx={{
-        lineHeight: "24px",
-      }}
+    <Text py="md" {...props} opacity={0.8} />
+  ),
+  a: (props) => (
+    <Anchor href={props.href} rel="noopener noreferrer">
+      {props.children}
+    </Anchor>
+  ),
+  img: (props) => (
+    // @ts-expect-error
+    <Image
+      src={props.src}
+      alt={props.alt}
+      sx={(t) => ({
+        height: "auto",
+        width: "100%",
+        maxWidth: "100%",
+        borderRadius: `${t.radius.md} !important`,
+      })}
       {...props}
     />
   ),
-  a: (props) => (
-    <Text component="a" href={props.href} rel="noopener noreferrer" color="#6868F7" fw="bold">
-      {props.children}
-    </Text>
-  ),
   // @ts-expect-error
-  ul: (props) => <List spacing={4} {...props} />,
+  ul: (props) => <List spacing="md" type="unordered" {...props} />,
   // @ts-expect-error
-  ol: (props) => <List spacing={4} {...props} />,
+  ol: (props) => <List spacing="md" type="ordered" {...props} />,
   li: (props) => (
     // @ts-expect-error
     <List.Item
-      color="#495057"
       sx={{
-        fontSize: "16px",
-        lineHeight: "32px",
-        ":before": {
-          content: "unset",
-        },
+        color: "#F8F9FA !important",
+        opacity: "0.8 !important",
       }}
       {...props}
     />
@@ -72,12 +74,14 @@ export interface MdxLayoutProps {
 }
 
 export const MdxLayout = (props: MdxLayoutProps) => {
+  const router = useRouter();
+
   const title = `${props.meta.title} | June Changelog`;
   const description = "Discover new updates and improvements to June.";
   const url = "https://changelog.june.so";
 
   const { setPrevUrl } = usePreviousPageUrl();
-  const router = useRouter();
+
   React.useLayoutEffect(() => {
     // using a timeout to wait for the page to render and get the right scroll position
     const timeout = setTimeout(() => {
@@ -144,11 +148,12 @@ export const MdxLayout = (props: MdxLayoutProps) => {
           <link
             rel="alternate"
             type="application/rss+xml"
-            title="June Changelog"
-            href="https://changelog.june.so/rss.xml"
+            title="BestRegards Changelog"
+            href="https://changelog.bestregards.me/rss.xml"
           />
         </Head>
       )}
+
       <Timeline
         date={dayjs(props.meta.publishedAt).format("MMM DD YYYY")}
         className={`timeline-month-${dayjs(props.meta.publishedAt).format("MM")}`}
@@ -187,6 +192,7 @@ export const MdxLayout = (props: MdxLayoutProps) => {
                 ))}
               </Flex>
             )}
+
             <motion.div
               layoutId={shouldAnimateFromPreviousPage ? `${props.meta.slug}` : ``}
               initial={{
@@ -238,45 +244,78 @@ export const MdxLayout = (props: MdxLayoutProps) => {
                 </Link>
               )}
             </motion.div>
+
             <motion.div
               initial={{ opacity: 0, y: shouldAnimateFromPreviousPage ? 0 : 20 }}
               animate={{ opacity: 1, y: 0, transition: { duration: 0.4, delay: 0.2 } }}
             >
               {isInBlogPage ? (
-                <h1
-                  className={`article-title text-gray-900 font-hero text-[24px] leading-[32px] font-bold ${
-                    props.hideLayout
-                      ? "cursor-pointer hover:underline underline-offset-[3px]"
-                      : "cursor-text hover:no-underline"
-                  }`}
+                <Title
+                  order={2}
+                  py="sm"
+                  onClick={() => {
+                    setPrevUrl(router.asPath);
+                  }}
+                  sx={{
+                    ...(props.hideLayout
+                      ? {
+                          cursor: "pointer",
+                          ":hover": {
+                            textDecoration: "underline",
+                            textDecorationThickness: "3px",
+                          },
+                        }
+                      : {}),
+                  }}
                 >
                   {props.meta.title}
-                </h1>
+                </Title>
               ) : (
                 <Link href={`/changelogs/${props.meta.slug}`}>
-                  <h2
-                    className={`article-title text-gray-900 font-hero text-[24px] leading-[32px] font-bold ${
-                      props.hideLayout
-                        ? "cursor-pointer hover:underline underline-offset-[3px]"
-                        : "cursor-text hover:no-underline"
-                    }`}
+                  <Title
+                    order={2}
+                    py="sm"
                     onClick={() => {
                       setPrevUrl(router.asPath);
                     }}
+                    sx={{
+                      ...(props.hideLayout
+                        ? {
+                            cursor: "pointer",
+                            ":hover": {
+                              textDecoration: "underline",
+                              textDecorationThickness: "3px",
+                            },
+                          }
+                        : {}),
+                    }}
                   >
                     {props.meta.title}
-                  </h2>
+                  </Title>
                 </Link>
               )}
             </motion.div>
           </Stack>
+
           {/* Article content */}
           <motion.div
             initial={{ opacity: 0, y: props.hideLayout ? 0 : 20 }}
             animate={{ opacity: 1, y: 0, transition: { duration: 0.4, delay: 0.2 } }}
           >
-            <div className="pb-16 text-lg leading-8 text-gray-700 font-hero">{props.children}</div>
+            <Box
+              pb="lg"
+              sx={{
+                color: "dimmed",
+                fontSize: "lg",
+              }}
+            >
+              {props.children}
+            </Box>
           </motion.div>
+
+          <Space h="xl" />
+          <Space h="xl" />
+
           {/* Article authors */}
           {!props.hideAuthors && <Contributors authors={props.meta.authors} />}
         </Box>

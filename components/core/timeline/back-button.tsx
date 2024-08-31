@@ -13,6 +13,7 @@ const BackButton = () => {
 
   return (
     <Box
+      display="flex"
       onClick={() => {
         if (prevUrl) {
           router.push(prevUrl);
@@ -22,12 +23,8 @@ const BackButton = () => {
           setIsLoading(true);
         }
       }}
-      display="flex"
-      w="125px"
-      // on hover change .arrow-line fill to #000000 and .arrow-head stroke to #000000
-      // and .back-button-text color to #000000
-      sx={{
-        gap: "10px",
+      sx={(t) => ({
+        gap: "5px",
         alignItems: "center",
         justifyContent: "start",
         cursor: "pointer",
@@ -41,17 +38,19 @@ const BackButton = () => {
           transition: "color 0.2s ease",
         },
         ":hover": {
+          color: t.colors.green[6],
+
           ".arrow-line": {
-            fill: "#000000",
+            fill: t.colors.green[6],
           },
           ".arrow-head": {
-            stroke: "#000000",
+            stroke: t.colors.green[6],
           },
           ".back-button-text": {
-            color: "#000000",
+            color: t.colors.green[6],
           },
         },
-      }}
+      })}
     >
       <svg
         width="11"
@@ -69,8 +68,6 @@ const BackButton = () => {
           <path
             className="arrow-head"
             d="M5.25 9L1.25 5L5.25 1"
-            // stroke="black"
-            // store rgba(134, 142, 150, 1)
             stroke="#868E96"
             stroke-width="1.5"
             stroke-linecap="round"
@@ -85,7 +82,14 @@ const BackButton = () => {
       </svg>
 
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
-        <Text size="md" color="#868E96">
+        <Text
+          color="dimmed"
+          sx={(t) => ({
+            ":hover": {
+              color: t.colors.green[6],
+            },
+          })}
+        >
           Back
         </Text>
       </motion.div>

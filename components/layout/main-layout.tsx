@@ -1,16 +1,16 @@
-import React, { ReactNode } from "react";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
+import { motion } from "framer-motion";
+import React, { ReactNode } from "react";
+import { useRouter } from "next/router";
+import { Box, Button, Container, Group, Space, Stack } from "@mantine/core";
+
+import Navbar from "components/core/navbar";
+import { Footer } from "components/core/footer";
+import TryBanner from "components/core/try-banner";
 import useTimelineStore from "lib/state/use-timeline-store";
 import usePageStatusStore from "lib/state/use-page-status-store";
 import useAnimatePageStore from "lib/state/use-animate-page-store";
-import { motion } from "framer-motion";
-import TryBanner from "components/core/try-banner";
-import Navbar from "components/core/navbar";
-import { Footer } from "components/core/footer";
-import TimeSelectionTabs from "../core/time-selection-tabs";
-import { Box, Button, Container, Group, Stack } from "@mantine/core";
 
 export interface MainLayoutProps {
   page?: number;
@@ -118,6 +118,7 @@ export const MainLayout = ({
           />
         </Head>
       )}
+
       <motion.div
         initial={animatePage ? "hidden" : "visible"}
         animate="visible"
@@ -133,25 +134,9 @@ export const MainLayout = ({
         >
           <Navbar />
         </motion.div>
-        {!isInBlogPage && (
-          <motion.div
-            variants={{
-              hidden: { opacity: 0 },
-              visible: { opacity: 1, transition: { duration: 0.6, delay: 0.2 } },
-            }}
-            layout
-            layoutId="timeline-switcher-button"
-            transition={{ duration: 0 }}
-            style={{
-              position: "sticky",
-              top: "32px",
-              zIndex: 1,
-              paddingBottom: "32px",
-            }}
-          >
-            <TimeSelectionTabs />
-          </motion.div>
-        )}
+
+        <Space h="xl" />
+
         <Box
           w="100vw"
           maw={"100%"}
@@ -181,28 +166,19 @@ export const MainLayout = ({
                     alignItems: "start",
 
                     [t.breakpoints.sm]: {
-                      minWidth: "100%",
                       gap: 8,
+                      minWidth: "100%",
                     },
                     [t.breakpoints.lg]: {
-                      minWidth: "834px",
                       gap: 14,
+                      minWidth: "834px",
                     },
                   })}
                 >
-                  {!isInBlogPage && (
-                    <div className="font-hero flex flex-col items-start w-full gap-2">
-                      <h1 className="text-5xl font-hero font-black tracking-tight text-gray-900 sm:text-6xl sm:leading-[75px] text-left">
-                        Changelog
-                      </h1>
-                      <p className="max-w-2xl text-2xl font-hero font-bold leading-8 text-gray-900 text-left">
-                        New features, improvements, and fixes every week
-                      </p>
-                    </div>
-                  )}
-                  <div className="flex flex-col justify-center">{children}</div>
+                  <Box>{children}</Box>
                 </Stack>
               </motion.div>
+
               <motion.div
                 hidden={!!infiniteScrollingView}
                 variants={{
@@ -223,7 +199,7 @@ export const MainLayout = ({
                 >
                   {page === 0 && hasMorePage ? (
                     <Link href={`/page/1#${timeline.view}`}>
-                      <Button variant="landingOutline" size="landingLg">
+                      <Button color="indigo" variant="outline">
                         Load more
                       </Button>
                     </Link>
@@ -231,14 +207,14 @@ export const MainLayout = ({
                     <Group align="center" spacing={4}>
                       {page > 0 && (
                         <Link href={`/page/${page - 1}${"#" + timeline.view}`}>
-                          <Button variant="landingOutline" size="landingLg">
+                          <Button color="indigo" variant="outline">
                             Previous page
                           </Button>
                         </Link>
                       )}
                       {hasMorePage && (
                         <Link href={`/page/${page + 1}${"#" + timeline.view}`}>
-                          <Button variant="landingOutline" size="landingLg">
+                          <Button color="indigo" variant="outline">
                             Next page
                           </Button>
                         </Link>
@@ -251,14 +227,15 @@ export const MainLayout = ({
           </Container>
         </Box>
       </motion.div>
+
       <motion.div
         initial={{ opacity: animatePage ? 0 : 1 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 0.4 }}
       >
-        <TryBanner _wrapper={{ my: [50, 50, 120] }} />
+        <TryBanner />
 
-        <Footer _wrapper={{ mt: [50, 50, 120], mb: 20 }} />
+        <Footer />
       </motion.div>
     </>
   );
