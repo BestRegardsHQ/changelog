@@ -21,9 +21,7 @@ function TryJuneBanner() {
 
   return (
     <Container size="xl">
-      <Space h={isMobileViewport ? "10vh" : "20vh"} />
-
-      <Space h="xl" />
+      <Space h="10vh" />
 
       <Image
         pb="5vh"
@@ -77,20 +75,12 @@ function TryJuneBanner() {
 
       <Center mb="xl">
         <Box>
-          <Button size="xl" component="a" href="https://www.bestregards.me/signup">
+          <Button size="lg" component="a" href="https://www.bestregards.me/signup">
             Create your free account
           </Button>
           <Space h="xl" />
         </Box>
       </Center>
-
-      <Text pt="5vh" pb="5vh" align="center" color="dimmed" size="md">
-        For creators, by creators <br />
-        <Text component="span" size="sm">
-          {" "}
-          &copy; 2024
-        </Text>
-      </Text>
     </Container>
   );
 }

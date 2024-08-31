@@ -56,6 +56,7 @@ const Page = ({ slugs, changelogsMap, totalItems }: IPageProps) => {
       <Center>
         <SegmentedControl
           size="md"
+          radius="xl"
           value={timelineView}
           onChange={(value: TimelineView) => {
             setTimelineView(value);

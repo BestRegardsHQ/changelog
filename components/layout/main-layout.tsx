@@ -119,32 +119,32 @@ export const MainLayout = ({
         </Head>
       )}
 
-      <motion.div
-        initial={animatePage ? "hidden" : "visible"}
-        animate="visible"
-        onAnimationComplete={() => {
-          setAnimatePage(false);
-        }}
-      >
+      <>
         <motion.div
-          variants={{
-            hidden: { opacity: 0 },
-            visible: { opacity: 1, transition: { duration: 0.6 } },
+          initial={animatePage ? "hidden" : "visible"}
+          animate="visible"
+          onAnimationComplete={() => {
+            setAnimatePage(false);
           }}
         >
-          <Navbar />
-        </motion.div>
+          <motion.div
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1, transition: { duration: 0.6 } },
+            }}
+          >
+            <Navbar />
+          </motion.div>
 
-        <Space h="xl" />
-
-        <Box
-          w="100vw"
-          maw={"100%"}
-          sx={{
-            zIndex: 10,
-          }}
-        >
-          <Container size="xl">
+          <Container
+            py="xl"
+            size="xl"
+            sx={(t) => ({
+              zIndex: 10,
+              background: t.colors.dark[7],
+              borderRadius: t.radius.lg,
+            })}
+          >
             <Stack
               spacing={8}
               w="full"
@@ -199,7 +199,12 @@ export const MainLayout = ({
                 >
                   {page === 0 && hasMorePage ? (
                     <Link href={`/page/1#${timeline.view}`}>
-                      <Button color="indigo" variant="outline">
+                      <Button
+                        color="indigo"
+                        sx={{
+                          padding: "0.75rem 3.5rem",
+                        }}
+                      >
                         Load more
                       </Button>
                     </Link>
@@ -207,16 +212,12 @@ export const MainLayout = ({
                     <Group align="center" spacing={4}>
                       {page > 0 && (
                         <Link href={`/page/${page - 1}${"#" + timeline.view}`}>
-                          <Button color="indigo" variant="outline">
-                            Previous page
-                          </Button>
+                          <Button color="indigo">Previous page</Button>
                         </Link>
                       )}
                       {hasMorePage && (
                         <Link href={`/page/${page + 1}${"#" + timeline.view}`}>
-                          <Button color="indigo" variant="outline">
-                            Next page
-                          </Button>
+                          <Button color="indigo">Next page</Button>
                         </Link>
                       )}
                     </Group>
@@ -224,19 +225,23 @@ export const MainLayout = ({
                 </Stack>
               </motion.div>
             </Stack>
+
+            <Space h="xl" />
           </Container>
-        </Box>
-      </motion.div>
+        </motion.div>
 
-      <motion.div
-        initial={{ opacity: animatePage ? 0 : 1 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.4 }}
-      >
-        <TryBanner />
+        <>
+          <motion.div
+            initial={{ opacity: animatePage ? 0 : 1 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.4 }}
+          >
+            <TryBanner />
 
-        <Footer />
-      </motion.div>
+            <Footer />
+          </motion.div>
+        </>
+      </>
     </>
   );
 };

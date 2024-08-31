@@ -24,7 +24,7 @@ const components: MDXComponents = {
   h2: (props) => <Title order={2} {...props} />,
   p: (props) => (
     // @ts-expect-error
-    <Text py="md" {...props} opacity={0.8} />
+    <Text py="md" {...props} opacity={0.9} />
   ),
   a: (props) => (
     <Anchor href={props.href} rel="noopener noreferrer">
@@ -54,7 +54,7 @@ const components: MDXComponents = {
     <List.Item
       sx={{
         color: "#F8F9FA !important",
-        opacity: "0.8 !important",
+        opacity: "0.9 !important",
       }}
       {...props}
     />

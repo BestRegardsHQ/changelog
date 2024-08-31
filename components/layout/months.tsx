@@ -99,7 +99,7 @@ const Months = ({ monthChangelogsMap, isInfiniteScrollingView }: IMonthsProps) =
                 <Box
                   sx={(t) => ({
                     height: "100%",
-                    [t.breakpoints.lg]: {
+                    [t.breakpoints.md]: {
                       height: "360px",
                       width: "682px",
                     },
@@ -151,10 +151,10 @@ const Months = ({ monthChangelogsMap, isInfiniteScrollingView }: IMonthsProps) =
                                   minHeight: "100%",
                                   objectFit: "cover",
                                   cursor: "pointer",
-                                  [t.breakpoints.md]: {
+                                  [t.breakpoints.sm]: {
                                     height: "176px",
                                   },
-                                  [t.breakpoints.lg]: {
+                                  [t.breakpoints.md]: {
                                     height: "360px",
                                     minHeight: "360px",
                                     width: "682px",
@@ -169,7 +169,12 @@ const Months = ({ monthChangelogsMap, isInfiniteScrollingView }: IMonthsProps) =
                         ))}
                       </Box>
                     ) : (
-                      <Group h="100%">
+                      <Group
+                        h="100%"
+                        sx={{
+                          gap: 0,
+                        }}
+                      >
                         <motion.div
                           layoutId={
                             index === 0 && isInfiniteScrollingView ? changelogs[0]?.slug : ``
@@ -182,19 +187,20 @@ const Months = ({ monthChangelogsMap, isInfiniteScrollingView }: IMonthsProps) =
                             scale: 1,
                           }}
                           transition={{ duration: 0.6 }}
-                          style={{ overflow: "hidden", height: "100%" }}
+                          style={{ overflow: "hidden", height: "100%", flex: "3 1 0" }}
                         >
                           <Image
                             src={changelogs[0]?.imageUrl}
                             alt={`${Object.keys(monthChangelogsMap)[index]} - ${0}`}
                             h="100%"
                             sx={(t) => ({
-                              minWidth: "176px",
                               width: "100%",
+                              minWidth: "176px",
                               objectFit: "cover",
                               minHeight: "176px",
-                              [t.breakpoints.lg]: {
+                              [t.breakpoints.md]: {
                                 width: "682px",
+                                minHeight: "360px",
                               },
                               cursor: "pointer",
                             })}
@@ -203,7 +209,14 @@ const Months = ({ monthChangelogsMap, isInfiniteScrollingView }: IMonthsProps) =
                             }}
                           />
                         </motion.div>
-                        <Stack h="100%">
+
+                        <Stack
+                          h="100%"
+                          spacing={0}
+                          sx={{
+                            flex: "1 1 0",
+                          }}
+                        >
                           {changelogs.slice(1, 3).map(({ imageUrl, publishedAt }, index) => (
                             <Image
                               key={index}
