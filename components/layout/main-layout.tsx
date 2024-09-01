@@ -3,7 +3,7 @@ import Head from "next/head";
 import { motion } from "framer-motion";
 import React, { ReactNode } from "react";
 import { useRouter } from "next/router";
-import { Box, Button, Container, Group, ScrollArea, Space, Stack } from "@mantine/core";
+import { Box, Button, Container, Group, Space, Stack } from "@mantine/core";
 
 import Navbar from "components/core/navbar";
 import { Footer } from "components/core/footer";
