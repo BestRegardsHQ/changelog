@@ -5,13 +5,13 @@ const MoreItems = (props: { numberOfItems: number }) => {
 
   return (
     <Box
-      w={10}
-      h={6}
-      display="flex"
-      bottom={4}
+      px="xs"
+      py={3}
       right={4}
+      bottom={4}
+      bg="indigo"
       color="white"
-      sx={{
+      sx={(t) => ({
         zIndex: 999,
         fontWeight: 500,
         fontSize: "12px",
@@ -21,8 +21,8 @@ const MoreItems = (props: { numberOfItems: number }) => {
         alignItems: "center",
         justifyContent: "center",
         lineHeight: "14.52px",
-      }}
-      bg="linear-gradient(180deg, #6868F7 0%, #4C40D9 100%)"
+        boxShadow: t.shadows.lg,
+      })}
     >
       +{numberOfItems}
     </Box>

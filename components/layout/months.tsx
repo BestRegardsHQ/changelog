@@ -3,7 +3,8 @@ import dayjs from "dayjs";
 import LazyLoad from "react-lazyload";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
-import { Box, Group, Image, Stack } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
+import { Box, em, getBreakpointValue, Group, Image, Stack, useMantineTheme } from "@mantine/core";
 
 import MoreItems from "components/core/more-items";
 import { IAggregatedChangelogs, IImagePreviewMeta } from "lib/models/view";
@@ -17,6 +18,9 @@ interface IMonthsProps {
 
 const Months = ({ monthChangelogsMap, isInfiniteScrollingView }: IMonthsProps) => {
   const router = useRouter();
+  const theme = useMantineTheme();
+  const sm = getBreakpointValue(theme.breakpoints.sm);
+  const isMobileViewport = useMediaQuery(`(max-width: ${em(sm)})`);
 
   const sortedChangelogsArrayByMonth: IImagePreviewMeta[][] = Object.keys(monthChangelogsMap || {})
     .sort((a, b) => {
@@ -77,6 +81,7 @@ const Months = ({ monthChangelogsMap, isInfiniteScrollingView }: IMonthsProps) =
             transition={{ duration: 0.6 }}
           >
             <Box
+              mb="xl"
               display="flex"
               pb={
                 index === sortedChangelogsArrayByMonth.length - 1
@@ -95,14 +100,10 @@ const Months = ({ monthChangelogsMap, isInfiniteScrollingView }: IMonthsProps) =
                   overflow: "hidden",
                   borderRadius: "16px",
                 }}
+                mb="xl"
               >
                 <Box
                   sx={(t) => ({
-                    height: "100%",
-                    [t.breakpoints.md]: {
-                      height: "360px",
-                      width: "682px",
-                    },
                     objectFit: "cover",
                     maxWidth: "682px",
                     position: "relative",
@@ -112,6 +113,11 @@ const Months = ({ monthChangelogsMap, isInfiniteScrollingView }: IMonthsProps) =
                     "&:hover img": {
                       boxShadow: "0px 2px 4px 0px rgba(0, 0, 0, 0.1)",
                     },
+                    width: "682px",
+                    height: "360px",
+                    ...(isMobileViewport && {
+                      height: "100%",
+                    }),
                   })}
                   display="flex"
                   onClick={() => {}}
@@ -146,19 +152,16 @@ const Months = ({ monthChangelogsMap, isInfiniteScrollingView }: IMonthsProps) =
                                 src={imageUrl}
                                 alt={`${Object.keys(monthChangelogsMap)[index]} - ${index}`}
                                 sx={(t) => ({
-                                  height: "100%",
-                                  width: "100%",
-                                  minHeight: "100%",
                                   objectFit: "cover",
                                   cursor: "pointer",
-                                  [t.breakpoints.sm]: {
+                                  height: "360px",
+                                  minHeight: "360px",
+                                  width: "682px",
+                                  ...(isMobileViewport && {
                                     height: "176px",
-                                  },
-                                  [t.breakpoints.md]: {
-                                    height: "360px",
-                                    minHeight: "360px",
-                                    width: "682px",
-                                  },
+                                    width: "100%",
+                                    minHeight: "100%",
+                                  }),
                                 })}
                                 onClick={() => {
                                   handleFindWeekChangelog(publishedAt);
@@ -192,18 +195,31 @@ const Months = ({ monthChangelogsMap, isInfiniteScrollingView }: IMonthsProps) =
                           <Image
                             src={changelogs[0]?.imageUrl}
                             alt={`${Object.keys(monthChangelogsMap)[index]} - ${0}`}
-                            h="100%"
-                            sx={(t) => ({
-                              width: "100%",
+                            sx={() => ({
                               minWidth: "176px",
                               objectFit: "cover",
-                              minHeight: "176px",
-                              [t.breakpoints.md]: {
-                                width: "682px",
-                                minHeight: "360px",
-                              },
+                              width: "682px",
+                              minHeight: "360px",
                               cursor: "pointer",
+                              ...(isMobileViewport && {
+                                width: "100%",
+                                minHeight: "176px",
+                              }),
                             })}
+                            styles={{
+                              root: {
+                                height: "100%",
+                              },
+                              imageWrapper: {
+                                height: "100%",
+                              },
+                              figure: {
+                                height: "100%",
+                              },
+                              image: {
+                                height: "100% !important",
+                              },
+                            }}
                             onClick={() => {
                               handleFindWeekChangelog(changelogs[0].publishedAt);
                             }}
@@ -222,18 +238,30 @@ const Months = ({ monthChangelogsMap, isInfiniteScrollingView }: IMonthsProps) =
                               key={index}
                               src={imageUrl}
                               alt={`${Object.keys(monthChangelogsMap)[index]} - ${index}`}
-                              mah="176px"
+                              mah="50%"
                               maw="176px"
                               sx={(t) => ({
-                                height: "88px",
-                                width: "88px",
                                 objectFit: "cover",
-                                [t.breakpoints.md]: {
-                                  height: "176px",
-                                  width: "176px",
-                                },
                                 cursor: "pointer",
                               })}
+                              styles={{
+                                root: {
+                                  height: "100%",
+                                },
+                                imageWrapper: {
+                                  height: "100%",
+                                },
+                                figure: {
+                                  height: "100%",
+                                },
+                                image: {
+                                  height: "100% !important",
+                                  borderLeft: "2px solid transparent",
+                                  ...(index === 0 && {
+                                    borderBottom: "2px solid transparent",
+                                  }),
+                                },
+                              }}
                               onClick={() => {
                                 handleFindWeekChangelog(publishedAt);
                               }}
