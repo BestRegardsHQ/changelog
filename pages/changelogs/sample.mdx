@@ -1,0 +1,27 @@
+import { MdxLayout } from "components/mdx-layout.tsx";
+
+export const meta = {
+  slug: "sample",
+  publishedAt: "2024-09-01T07:03:23.507Z",
+  title: "Sample changelog",
+  headerImage: "https://i.imgur.com/M9E576n.png",
+  authors: [
+    {
+      name: "Ohans Emmanuel",
+      description: "Engineering",
+      avatarUrl: "https://june-changelog.s3.eu-central-1.amazonaws.com/dscf5588_2_6dcd0ce29c.jpg",
+    },
+  ],
+};
+
+Today we’re excited to share 3 updates:
+
+1. ✨ #1
+2. 🦸‍️ #2
+3. 🆕 #3
+
+export default ({ children, ...rest }) => (
+  <MdxLayout meta={meta} {...rest}>
+    {children}
+  </MdxLayout>
+);
