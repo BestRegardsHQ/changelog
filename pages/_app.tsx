@@ -23,6 +23,12 @@ const MyApp = ({ Component, pageProps }) => {
           colorScheme: "dark",
           defaultRadius: "md",
           transitionTimingFunction: "ease-in-out",
+
+          globalStyles: (t) => ({
+            "img, video": {
+              maxWidth: "100%",
+            },
+          }),
         }}
         withGlobalStyles
         withNormalizeCSS

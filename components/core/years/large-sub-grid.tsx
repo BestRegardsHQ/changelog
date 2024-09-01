@@ -1,4 +1,4 @@
-import { Box, Image } from "@mantine/core";
+import { Box, Image, Skeleton } from "@mantine/core";
 import dayjs from "dayjs";
 import { IImagePreviewMeta } from "lib/models/view";
 import { useRouter } from "next/router";
@@ -17,7 +17,7 @@ const LargeSubGrid = (props: ISubGridProps) => {
       sx={{
         display: "grid",
         gap: "2px",
-        templateColumns: `repeat(${changelogs.length}, 1fr)`,
+        gridTemplateColumns: `repeat(${changelogs.length}, 1fr)`,
       }}
     >
       {changelogs.map(({ imageUrl, slug, publishedAt }, subI) => (
@@ -31,6 +31,19 @@ const LargeSubGrid = (props: ISubGridProps) => {
               cursor: "pointer",
               objectFit: "cover",
             }}
+            withPlaceholder
+            placeholder={
+              <Box
+                sx={{
+                  overflow: "hidden",
+                }}
+              >
+                <Skeleton
+                  height={rowLength - 1 <= 4 ? "198px" : "98px"}
+                  width={`${400 / changelogs.length - 2}px`}
+                />
+              </Box>
+            }
             onClick={() => {
               const date = dayjs(publishedAt);
               const targetDate = date.format("MMM YYYY");

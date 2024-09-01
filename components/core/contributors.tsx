@@ -5,7 +5,8 @@ export const Contributors = ({ authors }) => {
   return (
     <>
       <Divider mt={16} mb={8} />
-      <Stack px={6} align="start" spacing={4}>
+
+      <Stack px={6} spacing="lg" mt="xl">
         {authors.map((author) => (
           <Contributor key={author.name} {...author} />
         ))}

@@ -39,7 +39,7 @@ const components: MDXComponents = {
       sx={(t) => ({
         height: "auto",
         width: "100%",
-        maxWidth: "100%",
+        maxWidth: "100% !important",
         borderRadius: `${t.radius.md} !important`,
       })}
       {...props}

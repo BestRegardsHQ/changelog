@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import { motion } from "framer-motion";
 import LazyLoad from "react-lazyload";
-import { Box, Stack } from "@mantine/core";
+import { Box, Space, Stack } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 
 import MediumGrid from "components/core/years/medium-grid";
@@ -50,17 +50,13 @@ const Years = ({ yearChangelogsMap }: IYearsProps) => {
               >
                 <Box
                   maw="682px"
-                  w={{
-                    xs: "100%",
-                    sm: "100%",
-                    md: "682px",
-                  }}
                   display="flex"
                   onClick={() => {}}
                   sx={{
                     position: "relative",
                     overflow: "hidden",
                     borderRadius: "16px",
+                    width: isLargerThan768 ? "682px" : "100%",
                     transition: "box-shadow 0.3s",
                     "& img": {
                       transition: "box-shadow 0.3s",
@@ -74,11 +70,13 @@ const Years = ({ yearChangelogsMap }: IYearsProps) => {
                   }}
                 >
                   {changelogs.length > 27 && <MoreItems numberOfItems={changelogs.length - 27} />}
+
                   {changelogs.length === 3 && (
                     <LazyLoad height="421px" once>
                       <SmallGrid changelogs={changelogs} />
                     </LazyLoad>
                   )}
+
                   {((changelogs.length <= 9 && changelogs.length !== 3) || !isLargerThan768) && (
                     <LazyLoad
                       height={changelogs.length < 9 ? "300px" : "681px"}
@@ -88,12 +86,16 @@ const Years = ({ yearChangelogsMap }: IYearsProps) => {
                       <MediumGrid changelogs={changelogs} isFirstItem={index === 0} />
                     </LazyLoad>
                   )}
+
                   {changelogs.length > 9 && isLargerThan768 && (
                     <LazyLoad height="678px" offset={0} once>
                       <LargeGrid changelogs={changelogs} isFirstItem={index === 0} />
                     </LazyLoad>
                   )}
                 </Box>
+
+                <Space h="xl" />
+                <Space h="xl" />
               </Stack>
             </Box>
           </motion.div>

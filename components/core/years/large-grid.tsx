@@ -1,4 +1,4 @@
-import { Box, Group, Image, Stack } from "@mantine/core";
+import { Box, Group, Image, Skeleton, Stack } from "@mantine/core";
 import dayjs from "dayjs";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
@@ -15,8 +15,7 @@ const LargeGrid = (props: IGridProps) => {
         gap: "2px",
         display: "grid",
         height: "100%",
-        templateColumns: "repeat(1, 1fr)",
-        templateRows: `repeat(${Math.floor(changelogs.slice(0, 27).length / 9)}, 1fr)`,
+        gridTemplateColumns: "repeat(1, 1fr)",
       }}
     >
       {changelogs
@@ -34,7 +33,7 @@ const LargeGrid = (props: IGridProps) => {
           <Box
             key={i}
             sx={{
-              rowSpan: 1,
+              gridRow: 1,
             }}
           >
             <Group spacing="2px">
@@ -48,6 +47,9 @@ const LargeGrid = (props: IGridProps) => {
                     transition={{
                       duration: 0,
                     }}
+                    style={{
+                      width: "100%",
+                    }}
                   >
                     <Image
                       src={rowItems[0].imageUrl}
@@ -57,6 +59,33 @@ const LargeGrid = (props: IGridProps) => {
                       sx={{
                         objectFit: "cover",
                         cursor: "pointer",
+                      }}
+                      withPlaceholder
+                      placeholder={
+                        <Box
+                          sx={{
+                            overflow: "hidden",
+                          }}
+                        >
+                          <Skeleton
+                            height="198px"
+                            width={rowItems.length === 1 ? "100%" : "282px"}
+                          />
+                        </Box>
+                      }
+                      styles={{
+                        root: {
+                          height: "100%",
+                        },
+                        imageWrapper: {
+                          height: "100%",
+                        },
+                        figure: {
+                          height: "100%",
+                        },
+                        image: {
+                          height: "100% !important",
+                        },
                       }}
                       onClick={() => {
                         const date = dayjs(rowItems[0].publishedAt);
@@ -90,6 +119,7 @@ const LargeGrid = (props: IGridProps) => {
                   </Stack>
                 </>
               )}
+
               {i % 2 === 1 && (
                 <>
                   <Stack spacing="2px">
@@ -121,6 +151,30 @@ const LargeGrid = (props: IGridProps) => {
                       cursor: "pointer",
                       objectFit: "cover",
                     }}
+                    styles={{
+                      root: {
+                        height: "100%",
+                      },
+                      imageWrapper: {
+                        height: "100%",
+                      },
+                      figure: {
+                        height: "100%",
+                      },
+                      image: {
+                        height: "100% !important",
+                      },
+                    }}
+                    withPlaceholder
+                    placeholder={
+                      <Box
+                        sx={{
+                          overflow: "hidden",
+                        }}
+                      >
+                        <Skeleton height="198px" width={rowItems.length === 1 ? "100%" : "282px"} />
+                      </Box>
+                    }
                     onClick={() => {
                       const date = dayjs(rowItems[rowItems.length - 1].publishedAt);
                       const targetDate = date.format("MMM YYYY");

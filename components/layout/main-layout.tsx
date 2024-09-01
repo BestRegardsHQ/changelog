@@ -119,7 +119,7 @@ export const MainLayout = ({
         </Head>
       )}
 
-      <>
+      <Box px="sm">
         <motion.div
           initial={animatePage ? "hidden" : "visible"}
           animate="visible"
@@ -158,25 +158,7 @@ export const MainLayout = ({
                   visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.2 } },
                 }}
               >
-                <Stack
-                  display="flex"
-                  mih="100vh"
-                  sx={(t) => ({
-                    justifyContent: "start",
-                    alignItems: "start",
-
-                    [t.breakpoints.sm]: {
-                      gap: 8,
-                      minWidth: "100%",
-                    },
-                    [t.breakpoints.lg]: {
-                      gap: 14,
-                      minWidth: "834px",
-                    },
-                  })}
-                >
-                  <Box>{children}</Box>
-                </Stack>
+                {children}
               </motion.div>
 
               <motion.div
@@ -241,7 +223,7 @@ export const MainLayout = ({
             <Footer />
           </motion.div>
         </>
-      </>
+      </Box>
     </>
   );
 };
