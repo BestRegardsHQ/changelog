@@ -93,7 +93,7 @@ export const MainLayout = ({
             name="description"
             content="Discover new updates and improvements to BestRegards."
           />
-          <meta name="image" content="/changelog.png" />
+          <meta name="image" content="https://changelog.bestregards.me/changelog.png" />
           <meta property="og:type" content="website" />
           <meta property="og:url" content="https://changelog.bestregards.me" />
           <meta property="og:title" content={metaTitle} />
@@ -101,7 +101,7 @@ export const MainLayout = ({
             property="og:description"
             content="Discover new updates and improvements to BestRegards."
           />
-          <meta property="og:image" content="/changelog.png" />
+          <meta property="og:image" content="https://changelog.bestregards.me/changelog.png" />
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:url" content="https://changelog.bestregards.me" />
           <meta name="twitter:title" content={metaTitle} />
@@ -109,7 +109,7 @@ export const MainLayout = ({
             name="twitter:description"
             content="Discover new updates and improvements to BestRegards."
           />
-          <meta name="twitter:image" content="https://changelog.bestregards.me/social.png" />
+          <meta name="twitter:image" content="https://changelog.bestregards.me/changelog.png" />
           <link
             rel="alternate"
             type="application/rss+xml"

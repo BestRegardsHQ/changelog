@@ -76,9 +76,9 @@ export interface MdxLayoutProps {
 export const MdxLayout = (props: MdxLayoutProps) => {
   const router = useRouter();
 
-  const title = `${props.meta.title} | June Changelog`;
-  const description = "Discover new updates and improvements to June.";
-  const url = "https://changelog.june.so";
+  const title = `${props.meta.title} | BestRegards Changelog`;
+  const description = "Discover new updates and improvements to BestRegards.";
+  const url = "https://changelog.bestregards.me";
 
   const { setPrevUrl } = usePreviousPageUrl();
 
