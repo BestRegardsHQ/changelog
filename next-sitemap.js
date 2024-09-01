@@ -1,4 +1,4 @@
 module.exports = {
-  siteUrl: "https://changelog.june.so",
+  siteUrl: "https://changelog.bestregards.me",
   generateRobotsTxt: true,
 };
