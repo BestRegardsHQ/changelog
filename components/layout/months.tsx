@@ -113,10 +113,11 @@ const Months = ({ monthChangelogsMap, isInfiniteScrollingView }: IMonthsProps) =
                     "&:hover img": {
                       boxShadow: "0px 2px 4px 0px rgba(0, 0, 0, 0.1)",
                     },
-                    width: "682px",
+                    width: "100%",
                     height: "360px",
                     ...(isMobileViewport && {
                       height: "100%",
+                      maxWidth: "100%",
                     }),
                   })}
                   display="flex"
