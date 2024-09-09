@@ -4,7 +4,7 @@
         <title>BestRegards Changelog</title>
         <link>https://changelog.bestregards.me</link>
         <description>How BestRegards gets better every week</description>
-        <lastBuildDate>Sun, 01 Sep 2024 13:48:04 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 09 Sep 2024 05:58:55 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Feed for BestRegards changelog</generator>
         <image>
@@ -13,6 +13,13 @@
             <link>https://changelog.bestregards.me</link>
         </image>
         <copyright>All rights reserved 2024, BestRegards</copyright>
+        <item>
+            <title><![CDATA[Newsletter Metadata 💅🏼]]></title>
+            <link>https://changelog.bestregards.me/changelogs/newsletter-metadata</link>
+            <guid>https://changelog.bestregards.me/changelogs/newsletter-metadata</guid>
+            <pubDate>Mon, 09 Sep 2024 05:33:06 GMT</pubDate>
+            <enclosure url="https://bestregardsassets.com/changelog/newsletter-metadata.png" length="0" type="image/png"/>
+        </item>
         <item>
             <title><![CDATA[Forgot Password Feature 🚀]]></title>
             <link>https://changelog.bestregards.me/changelogs/forgot-password</link>
