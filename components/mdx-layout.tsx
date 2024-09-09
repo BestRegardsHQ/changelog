@@ -45,6 +45,16 @@ const components: MDXComponents = {
       {...props}
     />
   ),
+  video: (props) => (
+    <video
+      src={props.src}
+      style={{
+        width: "100%",
+        maxWidth: "100% !important",
+      }}
+      {...props}
+    />
+  ),
   // @ts-expect-error
   ul: (props) => <List spacing="md" type="unordered" {...props} />,
   // @ts-expect-error
