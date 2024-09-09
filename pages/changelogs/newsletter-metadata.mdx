@@ -60,3 +60,9 @@ In the Bug Fixes department, we’ve squashed that pesky issue where uploading l
 And that's it for today's update! We're always working on making Best Regards better, so be sure to check out the rest of the changelog for more details on what's new.
 
 Happy emailing! 🚀
+
+export default ({ children, ...rest }) => (
+  <MdxLayout meta={meta} {...rest}>
+    {children}
+  </MdxLayout>
+);
