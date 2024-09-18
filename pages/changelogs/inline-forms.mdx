@@ -1,0 +1,57 @@
+import { MdxLayout } from "components/mdx-layout.tsx";
+
+export const meta = {
+  slug: "inline-forms",
+  publishedAt: "2024-09-18T06:59:14.048Z",
+  title: "Inline Forms — Get Subscribers Without the Clutter 💌",
+  summary:
+    "We've rolled out Inline Forms to help you seamlessly collect subscribers without cluttering your site. You can now embed sleek, customizable forms anywhere on your landing page or website",
+  headerImage: "https://bestregardsassets.com/changelog/inline-forms.png",
+  authors: [
+    {
+      name: "Ohans Emmanuel",
+      description: "Engineering",
+      avatarUrl: "https://bestregardsassets.com/profile-photo/em.jpeg",
+    },
+    {
+      name: "Ohans Favour",
+      description: "Engineering",
+      avatarUrl: "https://bestregardsassets.com/profile-photo/paf.jpg",
+    },
+  ],
+};
+
+Now, you can add an inline form wherever you need, from the bottom of your landing page to the nooks and crannies of your website—no clutter, no fuss, no AI, just good human-to-human interaction.
+
+### How It Works:
+
+Visit the forms page and choose the inline form option. Then customize the form to your liking.
+
+<video controls autoPlay loop muted>
+  <source
+    src="https://bestregardsassets.com/changelog/inline-form-screencast.mp4"
+    type="video/mp4"
+  />
+</video>
+
+But wait, there’s more! We're not your average form provider. We’ve included a name field by default because “Hi [First Name]” is infinitely better than “Hi [Email Address].”
+
+Personalization is power, and we’re all about making your emails feel like handwritten love notes (minus the crumpled paper and ink smudges).
+
+### Customization? You Got It! 🎨
+
+With our new inline forms, you can customize colors, text, and CTA styles to fit your brand’s vibe. Want a vibrant neon background? Done. Prefer minimalist grayscale? You got it.
+
+Our **transparency mode** ensures that your form will gracefully blend into your page’s background, like it was always meant to be there. You’ll never have to worry about awkward mismatched boxes ruining your site’s aesthetic.
+
+And because we’re all about making life easy, we’ve added embed code support. Just copy, paste, and voilà—your form is live. It’s like magic, but with fewer rabbits and hats.
+
+![Inline form embed code](https://bestregardsassets.com/changelog/embed-form.png)
+
+Go ahead, get those subscribers, and look good doing it. ✨
+
+export default ({ children, ...rest }) => (
+  <MdxLayout meta={meta} {...rest}>
+    {children}
+  </MdxLayout>
+);

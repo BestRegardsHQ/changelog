@@ -4,7 +4,7 @@
         <title>BestRegards Changelog</title>
         <link>https://changelog.bestregards.me</link>
         <description>How BestRegards gets better every week</description>
-        <lastBuildDate>Mon, 09 Sep 2024 06:48:41 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 18 Sep 2024 07:35:34 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Feed for BestRegards changelog</generator>
         <image>
@@ -13,6 +13,13 @@
             <link>https://changelog.bestregards.me</link>
         </image>
         <copyright>All rights reserved 2024, BestRegards</copyright>
+        <item>
+            <title><![CDATA[Inline Forms — Get Subscribers Without the Clutter 💌]]></title>
+            <link>https://changelog.bestregards.me/changelogs/inline-forms</link>
+            <guid>https://changelog.bestregards.me/changelogs/inline-forms</guid>
+            <pubDate>Wed, 18 Sep 2024 06:59:14 GMT</pubDate>
+            <enclosure url="https://bestregardsassets.com/changelog/inline-forms.png" length="0" type="image/png"/>
+        </item>
         <item>
             <title><![CDATA[Newsletter Metadata 💅🏼]]></title>
             <link>https://changelog.bestregards.me/changelogs/newsletter-metadata</link>
