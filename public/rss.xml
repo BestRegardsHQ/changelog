@@ -4,7 +4,7 @@
         <title>BestRegards Changelog</title>
         <link>https://changelog.bestregards.me</link>
         <description>How BestRegards gets better every week</description>
-        <lastBuildDate>Wed, 18 Sep 2024 07:35:34 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 25 Sep 2024 17:49:43 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Feed for BestRegards changelog</generator>
         <image>
@@ -13,6 +13,13 @@
             <link>https://changelog.bestregards.me</link>
         </image>
         <copyright>All rights reserved 2024, BestRegards</copyright>
+        <item>
+            <title><![CDATA[Rich Editor Placeholder: Your New Writing Buddy 📝]]></title>
+            <link>https://changelog.bestregards.me/changelogs/rich-editor-placeholder</link>
+            <guid>https://changelog.bestregards.me/changelogs/rich-editor-placeholder</guid>
+            <pubDate>Thu, 19 Sep 2024 10:00:00 GMT</pubDate>
+            <enclosure url="https://private-user-images.githubusercontent.com/46670083/367626420-89fdd027-544e-4c9d-9716-068d548456bf.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MjcyODM5OTUsIm5iZiI6MTcyNzI4MzY5NSwicGF0aCI6Ii80NjY3MDA4My8zNjc2MjY0MjAtODlmZGQwMjctNTQ0ZS00YzlkLTk3MTYtMDY4ZDU0ODQ1NmJmLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA5MjUlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwOTI1VDE3MDEzNVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWE2NGI3OWJlMjE1NGNjM2MzYzkwMzZmYjI2OTBjZGMxODI3NGIwNjc4ZWQ0ZTdkMDcwMWFkNDgzMjBlNDA2YjQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.6xvKGyf_UraFyvZnshU0kts5E-O1nplFqZdi4gyVKjg" length="0" type="image/png"/>
+        </item>
         <item>
             <title><![CDATA[Inline Forms — Get Subscribers Without the Clutter 💌]]></title>
             <link>https://changelog.bestregards.me/changelogs/inline-forms</link>

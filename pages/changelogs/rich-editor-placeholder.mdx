@@ -1,0 +1,55 @@
+import { MdxLayout } from "components/mdx-layout.tsx";
+
+export const meta = {
+  slug: "rich-editor-placeholder",
+  publishedAt: "2024-09-19T10:00:00.000Z",
+  title: "Rich Editor Placeholder: Your New Writing Buddy 📝",
+  summary:
+    "Say goodbye to blank page syndrome! Our new smart placeholder guides you through Best Regards' powerful features, making your writing experience smoother than ever.",
+  headerImage: "/images/rich-editor-placeholder/headerImg.png",
+  authors: [
+    {
+      name: "Ohans Favour",
+      description: "Engineering",
+      avatarUrl: "https://bestregardsassets.com/profile-photo/paf.jpg",
+    },
+  ],
+};
+
+Hold onto your keyboards, because our latest update is all about making your writing experience smoother than a freshly ironed shirt! Say hello to the Rich Editor Placeholder!
+
+### How It Works:
+
+Now, when you open the editor, you'll be greeted with a smart placeholder that's more than just a pretty face. It's your personal writing assistant, ready to help you craft the perfect email.
+
+Want to see what magic awaits you? Here's a sneak peek at your new writing companion:
+
+### <img src="/images/rich-editor-placeholder/bodyImg.png" alt="Rich Editor Placeholder" />
+
+-  Type '/' to insert blocks - Quickly add various content elements like images, videos, or custom sections to your email.
+-  Use `{{subscriber.firstName || 'there'}}` for personalization - Easily add dynamic content to address your subscribers by name or use a fallback.
+-  Press 'space' to explore our AI-powered features - Access intelligent writing suggestions and content generation tools with a simple keystroke.
+
+And just like that, you're armed with the knowledge to wield our most powerful features!
+
+### Improvements?
+
+Oh, we've got those in spades! This new placeholder is designed to:
+
+1. **Save Time**: Quick access to features means less time searching and more time writing.
+2. **Boost Engagement**: Reminders about personalization can help skyrocket your open and click-through rates.
+3. **Unleash Creativity**: With AI suggestions just a keystroke away, writer's block becomes a thing of the past.
+
+### What's Next?
+
+We're always cooking up new ways to make your email creation process smoother than butter on a hot pancake. Stay tuned for more updates, and as always, we'd love to hear your feedback!
+
+And that's it for today's update! We're always working on making Best Regards better, so be sure to check out the rest of the changelog for more details on what's new.
+
+Happy emailing, and may your words flow as smoothly as our new placeholder! 🚀📧
+
+export default ({ children, ...rest }) => (
+  <MdxLayout meta={meta} {...rest}>
+    {children}
+  </MdxLayout>
+);
