@@ -1,0 +1,71 @@
+import { MdxLayout } from "components/mdx-layout.tsx";
+
+export const meta = {
+  slug: "form-bug-fixes",
+  publishedAt: "2024-10-13T07:03:23.507Z",
+  title: "Form-idable Fixes and Fantastic Features! 🎉",
+  summary:
+    "Get ready for a form-tastic update! We've squashed bugs, added responsive magic, and sprinkled in some multi-embedding pixie dust. Your forms are about to become the life of the web page party!",
+  headerImage: "https://bestregardsassets.com/changelog/responsive-inline-forms.png",
+  authors: [
+    {
+      name: "Ohans Favour",
+      description: "Engineering",
+      avatarUrl: "https://bestregardsassets.com/profile-photo/paf.jpg",
+    },
+  ],
+};
+
+Holy guacamole, form fans! We've been busy bees 🐝 in the hive of innovation, and boy oh boy, do we have some sweet updates for you! Buckle up, because your forms are about to get a makeover that would make even Cinderella's Fairy Godmother jealous.
+
+### Responsive Inline Forms: Because Size Does Matter! 📱💻
+
+Remember when your inline forms looked like they'd been squished by a digital steamroller on mobile devices? Well, no more! We've given our forms a crash course in yoga, and now they're more flexible than a gymnast doing the splits.
+
+![Inline form strutting its stuff on desktop](https://bestregardsassets.com/changelog/desktop-form.png)
+
+On desktop, your forms will stand tall and proud, showing off all their fields in a majestic display of data collection.
+
+![Inline form doing the limbo on mobile](https://bestregardsassets.com/changelog/mobile-form.png)
+
+But on mobile? They'll do the limbo, baby! Sleek, compact, and ready to rock on even the tiniest screens. It's like having a form that moonlights as a transformer – more than meets the eye!
+
+### Multiple Form Embeddings: Because Sometimes, Once is Not Enough! 🔄
+
+We heard you loud and clear when you said, "Hey, I want to use this awesome form more than once on my page!" And we thought, "Why not? The more, the merrier!"
+
+So we fixed that pesky bug faster than you can say "supercalifragilisticexpialidocious." Now you can embed the same form multiple times on a single page. It's like form inception, but without the confusing plot twists!
+
+![Forms having a party on a single page](https://bestregardsassets.com/changelog/multiple-forms.png)
+
+Go ahead, sprinkle those forms like confetti across your page. Your users will thank you for the convenience, and your data will be doing the conga line into your database!
+
+### The Great Form Switcheroo: Full-Page to Inline in a Blink! 👁️‍🗨️
+
+Ever wished you could switch between full-page and inline forms faster than a chameleon changes colors? Well, wish no more! We've added a magical button that lets you flip between form views quicker than you can say "abracadabra"!
+
+![Full-page form in all its glory](https://bestregardsassets.com/changelog/switch-to-block.png)
+
+One second, you're looking at a form that's living its best life, taking up the whole page like it's at a form spa...
+
+![Inline form, compact and ready for action](https://bestregardsassets.com/changelog/switch-to-inline.png)
+
+And bam! With just one click, it's now an inline form, rubbing shoulders with your other content like they're best buds at a block party.
+
+It's so easy, you might find yourself switching back and forth just for fun. (We won't judge. We do it too sometimes. It's oddly satisfying!)
+
+But here's the important part: **don't forget to click that "Update" or "Save" button after making your changes!** This ensures that your new form layout will be reflected in your live and embedded forms. It's like the final "ta-da!" in your form transformation magic show!
+
+### But Wait, There's More! 🎁
+
+- We've taught our forms to speak emoji. Okay, not really, but wouldn't that be cool? 😎
+- We're working on optimizing form loading speeds. Stay tuned for future updates on performance improvements!
+- We've added a secret "dark mode" for vampires filling out forms. Just kidding, but now we kind of want to do that...
+
+Happy form-ing, everyone!
+
+export default ({ children, ...rest }) => (
+  <MdxLayout meta={meta} {...rest}>
+    {children}
+  </MdxLayout>
+);
