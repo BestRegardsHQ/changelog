@@ -4,7 +4,7 @@
         <title>BestRegards Changelog</title>
         <link>https://changelog.bestregards.me</link>
         <description>How BestRegards gets better every week</description>
-        <lastBuildDate>Wed, 25 Sep 2024 18:15:49 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 13 Oct 2024 12:58:10 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Feed for BestRegards changelog</generator>
         <image>
@@ -13,6 +13,13 @@
             <link>https://changelog.bestregards.me</link>
         </image>
         <copyright>All rights reserved 2024, BestRegards</copyright>
+        <item>
+            <title><![CDATA[Form-idable Fixes and Fantastic Features! 🎉]]></title>
+            <link>https://changelog.bestregards.me/changelogs/form-bug-fixes</link>
+            <guid>https://changelog.bestregards.me/changelogs/form-bug-fixes</guid>
+            <pubDate>Sun, 13 Oct 2024 07:03:23 GMT</pubDate>
+            <enclosure url="https://bestregardsassets.com/changelog/responsive-inline-forms.png" length="0" type="image/png"/>
+        </item>
         <item>
             <title><![CDATA[Rich Editor Placeholder: Your New Writing Buddy 📝]]></title>
             <link>https://changelog.bestregards.me/changelogs/rich-editor-placeholder</link>
